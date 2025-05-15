@@ -269,8 +269,6 @@ get_header();
 
 
 
-Helloooooo
-
 <?php
 
 get_footer();
