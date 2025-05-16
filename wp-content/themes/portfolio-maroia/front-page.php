@@ -51,7 +51,10 @@ get_header();
     </section>
     <section id="projects" class="projects-section">
         <div class="projects">
-            <h2>Mes projets</h2>
+            <h2>
+                <?php $project_title = get_field('project_title') ?>
+                <?= $project_title !== '' ? $project_title : '' ?>
+            </h2>
             <div class="project-container">
                 <article class="project">
                     <div class="floating">
