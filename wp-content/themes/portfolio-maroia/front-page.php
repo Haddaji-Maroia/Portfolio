@@ -49,62 +49,59 @@ get_header();
                  alt="decoration chinese style">
         </div>
     </section>
+
+
     <section id="projects" class="projects-section">
         <div class="projects">
             <h2>
-                <?php $project_title = get_field('project_title') ?>
-                <?= $project_title !== '' ? $project_title : '' ?>
+                <?php $project_title = get_field('project_title'); ?>
+                <?= $project_title !== '' ? esc_html($project_title) : ''; ?>
             </h2>
+
             <div class="project-container">
-                <article class="project">
-                    <div class="floating">
-                        <a class="project-card" href="">
-                            <div class="project-cover">
-                                <figure>
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/portfolio.png"
-                                         alt="portfolio cover">
-                                    <span>Portfolio</span>
-                                </figure>
-                            </div>
-                        </a>
-                    </div>
-                </article>
+                <?php
+                $args = [
+                    'post_type' => 'projets',
+                    'posts_per_page' => -1
+                ];
 
-                <article class="project">
-                    <div class="floating">
-                        <a class="project-card" href="">
-                            <div class="project-cover">
-                                <figure>
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/ghibliWonders.png"
-                                         alt="Ghibli Wonders app cover">
-                                    <span>Ghibli Wonders</span>
-                                </figure>
-                            </div>
-                        </a>
-                    </div>
-                </article>
+                $query = new WP_Query($args);
 
-                <article class="project">
-                    <div class="floating">
-                        <a class="project-card" href="">
-                            <div class="project-cover">
-                                <figure>
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/luffyMood.png"
-                                         alt="LuffyMood app cover">
-                                    <span>LuffyMood</span>
-                                </figure>
+                if ($query->have_posts()) :
+                    while ($query->have_posts()) : $query->the_post();
+                        $project_image = get_the_post_thumbnail_url(get_the_ID(), 'medium');
+                        $project_title = get_the_title();
+                        $project_link = get_permalink(); // oppure un campo ACF personalizzato, se vuoi
+                        ?>
+                        <article class="project">
+                            <div class="floating">
+                                <a class="project-card" href="<?= esc_url($project_link); ?>">
+                                    <div class="project-cover">
+                                        <figure>
+                                            <?php if (has_post_thumbnail()) : ?>
+                                                <?php the_post_thumbnail('full'); ?>
+                                            <?php endif; ?>
+                                            <span><?= esc_html(get_the_title()); ?></span>
+                                        </figure>
+                                    </div>
+                                </a>
                             </div>
-                        </a>
-                    </div>
-                </article>
+                        </article>
+                    <?php
+                    endwhile;
+                    wp_reset_postdata();
+                else :
+                    echo '<p>Aucun projet trouvé.</p>';
+                endif;
+                ?>
             </div>
+
             <div class="button-wrapper">
-                <a class="btn-projects" href="html/projects.html">Explorer →</a>
+                <a class="btn-projects" href="<?php echo get_permalink( get_page_by_path('mes-projets') ); ?>"><?php _e('Explorer →', 'textdomain'); ?></a>
             </div>
-            <!--<img class="corner-project corner-top-left-project" src="images/frame-decoration.svg" alt="decoration chinese style">
-            <img class="corner-project corner-bottom-right-project" src="images/frame-decoration.svg" alt="decoration chinese style"> -->
         </div>
     </section>
+
 
     <section id="history" class="history-section">
         <div class="history">
