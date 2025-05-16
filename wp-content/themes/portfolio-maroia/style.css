@@ -49,17 +49,10 @@ p{
 
 .main-navigation {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.main-navigation {
-    display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 40px;
     position: relative;
+    width: 100%;
 }
 
 .logo {
@@ -168,6 +161,12 @@ p{
     }
 }
 
+
+@media (max-width: 700px) {
+    header{
+        padding: 30px 40px;
+    }
+}
 
 
 
@@ -773,6 +772,17 @@ p{
 .contacts, .lists, .navigation, .social{
     list-style: none;
 }
+
+
+.link-menu:hover{
+    text-decoration: underline;
+}
+
+.menu-title{
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
 
 @media (max-width: 800px) {
     .menus {
