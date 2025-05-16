@@ -1,4 +1,8 @@
 <?php
+// Disable Gutenberg on the back end.
+add_filter('use_block_editor_for_post', '__return_false');
+// Disable Gutenberg for widgets.
+add_filter('use_widgets_block_editor', '__return_false');
 
 function portfoliomaroia_theme_support(){
     //Add Dynamic title tag support
@@ -52,15 +56,16 @@ function portfoliomaroia_register_scripts() {
 }
 
 add_action('wp_enqueue_scripts', 'portfoliomaroia_register_scripts');
-
-
-?>
-
-<?php
-
 add_filter('show_admin_bar', '__return_false');
 
-?>
+function my_own_mime_types($mimes) {
+    $mimes['svg'] = 'image/svg+xml';
+
+    return $mimes;
+}
+
+add_filter('upload_mimes', 'my_own_mime_types');
+
 
 
 

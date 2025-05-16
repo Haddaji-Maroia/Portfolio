@@ -2,24 +2,21 @@
 get_header();
 ?>
 
-<?php
-    if( have_posts() ){
-        while( have_posts() ){
-            the_post();
-            //the_content();
-        }
-    }
-?>
 <main>
     <section id="landing" class="landing">
         <div class="content">
             <h1 class="title">
-                Maroia Haddaji<br>
+                <?php $title = get_field('title') ?>
+                <?= $title !== '' ? $title : '' ?><br>
                 <span class="subtitle">Web developer & designer</span>
             </h1>
             <div class="clouds">
-                <img class="cloud cloud-left oscillate" src="<?php echo get_template_directory_uri(); ?>/assets/images/clouds-left.svg" alt="big cloud chinese style">
-                <img class="cloud cloud-right oscillate" src="<?php echo get_template_directory_uri(); ?>/assets/images/clouds-right.svg" alt="small cloud chinese style">
+                <img class="cloud cloud-left oscillate"
+                     src="<?php echo get_template_directory_uri(); ?>/assets/images/clouds-left.svg"
+                     alt="big cloud chinese style">
+                <img class="cloud cloud-right oscillate"
+                     src="<?php echo get_template_directory_uri(); ?>/assets/images/clouds-right.svg"
+                     alt="small cloud chinese style">
             </div>
         </div>
         <div class="tree-canvas">
@@ -29,31 +26,27 @@ get_header();
     <section id="aboutMe" class="about-me">
         <div class="presentation">
             <div class="text-about">
-                <h2>Qui suis-je ?</h2>
-                <p>Je suis Maroia, développeuse web et designer.
-                    Mon parcours allie esthétique et technologie, comme le yin et le yang en harmonie.
-                </p>
-                <p>
-                    Actuellement étudiante en Infographie à la Haute École de la Province de Liège,
-                    je me spécialise dans le web — là où l’art et le code se rencontrent.
-                </p>
-                <p>
-                    J’aime créer des interfaces comme on compose un paysage :
-                    chaque ligne, chaque espace, chaque détail a un sens.
-                </p>
-                <p>
-                    Je cherche l’équilibre entre forme et fonction,  entre performance et poésie.
-                </p>
+                <?php $about_title = get_field('about_title') ?>
+                <h2><?= $about_title !== '' ? $about_title : '' ?></h2>
+                <?php $about_text = get_field('about_text') ?>
+                <?= $about_text !== '' ? $about_text : '' ?>
             </div>
             <div class="illustration">
                 <div class="circle-container">
-                    <img class="circle" src="<?php echo get_template_directory_uri(); ?>/assets/images/circle.svg" alt="simple blue circle for background">
-                    <img class="avatar" src="<?php echo get_template_directory_uri(); ?>/assets/images/avatar.png" alt="my own illustration">
+                    <img class="circle" src="<?php echo get_template_directory_uri(); ?>/assets/images/circle.svg"
+                         alt="simple blue circle for background">
+                    <img class="avatar" src="<?php echo get_template_directory_uri(); ?>/assets/images/avatar.png"
+                         alt="my own illustration">
                 </div>
             </div>
-            <img class="lantern" src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern.svg" alt="chinese lantern">
-            <img class="corner-about corner-top-left-about" src="<?php echo get_template_directory_uri(); ?>/assets/images/frame-decoration.svg" alt="decoration chinese style">
-            <img class="corner-about corner-bottom-right-about" src="<?php echo get_template_directory_uri(); ?>/assets/images/frame-decoration.svg" alt="decoration chinese style">
+            <img class="lantern" src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern.svg"
+                 alt="chinese lantern">
+            <img class="corner-about corner-top-left-about"
+                 src="<?php echo get_template_directory_uri(); ?>/assets/images/frame-decoration.svg"
+                 alt="decoration chinese style">
+            <img class="corner-about corner-bottom-right-about"
+                 src="<?php echo get_template_directory_uri(); ?>/assets/images/frame-decoration.svg"
+                 alt="decoration chinese style">
         </div>
     </section>
     <section id="projects" class="projects-section">
@@ -65,7 +58,8 @@ get_header();
                         <a class="project-card" href="">
                             <div class="project-cover">
                                 <figure>
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/portfolio.png" alt="portfolio cover">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/portfolio.png"
+                                         alt="portfolio cover">
                                     <span>Portfolio</span>
                                 </figure>
                             </div>
@@ -78,7 +72,8 @@ get_header();
                         <a class="project-card" href="">
                             <div class="project-cover">
                                 <figure>
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/ghibliWonders.png" alt="Ghibli Wonders app cover">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/ghibliWonders.png"
+                                         alt="Ghibli Wonders app cover">
                                     <span>Ghibli Wonders</span>
                                 </figure>
                             </div>
@@ -91,7 +86,8 @@ get_header();
                         <a class="project-card" href="">
                             <div class="project-cover">
                                 <figure>
-                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/luffyMood.png" alt="LuffyMood app cover">
+                                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/luffyMood.png"
+                                         alt="LuffyMood app cover">
                                     <span>LuffyMood</span>
                                 </figure>
                             </div>
@@ -100,7 +96,7 @@ get_header();
                 </article>
             </div>
             <div class="button-wrapper">
-                <a class="btn-projects" href="html/projects.html">Explorer  →</a>
+                <a class="btn-projects" href="html/projects.html">Explorer →</a>
             </div>
             <!--<img class="corner-project corner-top-left-project" src="images/frame-decoration.svg" alt="decoration chinese style">
             <img class="corner-project corner-bottom-right-project" src="images/frame-decoration.svg" alt="decoration chinese style"> -->
@@ -109,30 +105,39 @@ get_header();
 
     <section id="history" class="history-section">
         <div class="history">
-            <img class="furin furin-top" src="<?php echo get_template_directory_uri(); ?>/assets/images/furin-top.svg" alt="japanese top furin">
-            <img class="furin furin-bottom" src="<?php echo get_template_directory_uri(); ?>/assets/images/furin-bottom.svg" alt="japanese bottom furin">
+            <img class="furin furin-top" src="<?php echo get_template_directory_uri(); ?>/assets/images/furin-top.svg"
+                 alt="japanese top furin">
+            <img class="furin furin-bottom"
+                 src="<?php echo get_template_directory_uri(); ?>/assets/images/furin-bottom.svg"
+                 alt="japanese bottom furin">
             <h2>Mon histoire</h2>
 
             <div class="timeline">
                 <div class="experience">
                     <p class="year"><span class="date">2015-2020</span><br>Diplôme en comptabilité en Italie</p>
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern-blue.svg" alt="lantern blue">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern-blue.svg"
+                         alt="lantern blue">
                 </div>
                 <div class="experience">
                     <p class="year"><span class="date">2020-2021</span><br>Helmo Marketing</p>
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern-blue.svg" alt="lantern blue">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern-blue.svg"
+                         alt="lantern blue">
                 </div>
                 <div class="experience">
                     <p class="year"><span class="date">2021-2022</span><br>École de langue française à la HEPL</p>
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern-blue.svg" alt="lantern blue">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern-blue.svg"
+                         alt="lantern blue">
                 </div>
                 <div class="experience">
                     <p class="year"><span class="date">2021-2022</span><br>Helmo International Business</p>
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern-blue.svg" alt="lantern blue">
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern-blue.svg"
+                         alt="lantern blue">
                 </div>
                 <div class="experience">
-                    <p class="year"><span class="date">2023-<span class="small">à ce jour</span></span><br>HEPL Techniques infographiques option web</p>
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern-blue.svg" alt="lantern blue">
+                    <p class="year"><span class="date">2023-<span class="small">à ce jour</span></span><br>HEPL
+                        Techniques infographiques option web</p>
+                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern-blue.svg"
+                         alt="lantern blue">
                 </div>
             </div>
         </div>
@@ -141,12 +146,15 @@ get_header();
     <section id="technologies" class="technologies-section">
         <div class="technogies">
             <h2>Les outils de mon quotidien</h2>
-            <img class="clouds2 clouds2-right" src="<?php echo get_template_directory_uri(); ?>/assets/images/cloud-2.svg" alt="clouds chinese style">
-            <img class="clouds2 clouds2-left" src="<?php echo get_template_directory_uri(); ?>/assets/images/cloud-2.svg" alt="clouds chinese style">
+            <img class="clouds2 clouds2-right"
+                 src="<?php echo get_template_directory_uri(); ?>/assets/images/cloud-2.svg" alt="clouds chinese style">
+            <img class="clouds2 clouds2-left"
+                 src="<?php echo get_template_directory_uri(); ?>/assets/images/cloud-2.svg" alt="clouds chinese style">
             <div class="box-tech">
                 <div class="tech figma-tech">
                     <div class="icon">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images//icons/figma.svg" alt="figma icon">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images//icons/figma.svg"
+                             alt="figma icon">
                     </div>
                     <div class="text wrapper">
                         <p>Figma</p>
@@ -155,7 +163,8 @@ get_header();
                 </div>
                 <div class="tech html-tech">
                     <div class="icon">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/html.svg" alt="Html icon">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/html.svg"
+                             alt="Html icon">
                     </div>
                     <div class="text wrapper">
                         <p>HTML</p>
@@ -164,7 +173,8 @@ get_header();
                 </div>
                 <div class="tech css-tech">
                     <div class="icon">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/css.svg" alt="Css icon">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/css.svg"
+                             alt="Css icon">
                     </div>
                     <div class="text wrapper">
                         <p>CSS</p>
@@ -173,7 +183,8 @@ get_header();
                 </div>
                 <div class="tech javascript-tech">
                     <div class="icon">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/javascript.svg" alt="JavaScript icon">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/javascript.svg"
+                             alt="JavaScript icon">
                     </div>
                     <div class="text wrapper">
                         <p>JavaScript</p>
@@ -182,7 +193,8 @@ get_header();
                 </div>
                 <div class="tech typescript-tech">
                     <div class="icon">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/typescript.svg" alt="TypeScript icon">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/typescript.svg"
+                             alt="TypeScript icon">
                     </div>
                     <div class="text wrapper">
                         <p>TypeScript</p>
@@ -191,7 +203,8 @@ get_header();
                 </div>
                 <div class="tech php-tech">
                     <div class="icon">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/php.svg" alt="Php icon">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/php.svg"
+                             alt="Php icon">
                     </div>
                     <div class="text wrapper">
                         <p>PHP</p>
@@ -200,7 +213,8 @@ get_header();
                 </div>
                 <div class="tech sql-tech">
                     <div class="icon">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/sql.svg" alt="Sql icon">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/sql.svg"
+                             alt="Sql icon">
                     </div>
                     <div class="text wrapper">
                         <p>SQL</p>
@@ -209,7 +223,8 @@ get_header();
                 </div>
                 <div class="tech git-tech">
                     <div class="icon">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/git.svg" alt="Git icon">
+                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/git.svg"
+                             alt="Git icon">
                     </div>
                     <div class="text wrapper">
                         <p>Git</p>
@@ -227,7 +242,9 @@ get_header();
             </div>
             <div class="contact-main">
                 <div class="cloudsContact">
-                    <img class="clouds-contact" src="<?php echo get_template_directory_uri(); ?>/assets/images/cloud-2.svg" alt="clouds chinese style">
+                    <img class="clouds-contact"
+                         src="<?php echo get_template_directory_uri(); ?>/assets/images/cloud-2.svg"
+                         alt="clouds chinese style">
                 </div>
                 <div class="form-section">
                     <section class="form-container">
@@ -245,7 +262,8 @@ get_header();
                                     </div>
                                     <div class="form-input-wrapper">
                                         <label for="email">Email</label>
-                                        <input type="email" id="email" name="email" placeholder="Ex. marksmith@gmail.com">
+                                        <input type="email" id="email" name="email"
+                                               placeholder="Ex. marksmith@gmail.com">
                                     </div>
                                     <div class="form-input-wrapper">
                                         <label for="object">Sujet</label>
@@ -253,7 +271,8 @@ get_header();
                                     </div>
                                     <div class="form-input-wrapper">
                                         <label for="message">Message</label>
-                                        <textarea name="message" id="message" cols="30" rows="10" placeholder="Ex. Écrivez votre message ici"></textarea>
+                                        <textarea name="message" id="message" cols="30" rows="10"
+                                                  placeholder="Ex. Écrivez votre message ici"></textarea>
                                     </div>
                                 </div>
                                 <button class="btn-form" type="submit">Contactez-moi !</button>

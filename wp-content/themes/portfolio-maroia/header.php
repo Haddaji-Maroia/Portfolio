@@ -51,11 +51,11 @@
 
 
             <ul class="menu">
-                <li><a href="#landing">Accueil</a></li>
-                <li><a href="#aboutMe">About me</a></li>
+                <li><a href="<?php echo home_url(); ?>/#landing">Accueil</a></li>
+                <li><a href="<?php echo home_url(); ?>/#aboutMe">About me</a></li>
                 <li><a href="<?php echo get_permalink( get_page_by_path('mes-projets') ); ?>">Projets</a></li>
-                <li><a href="#history">Mon histoire</a></li>
-                <li><a href="#contactMe">Contact</a></li>
+                <li><a href="<?php echo home_url(); ?>/#history">Mon histoire</a></li>
+                <li><a href="<?php echo home_url(); ?>/#contactMe">Contact</a></li>
                 <li><a href="">EN</a></li>
             </ul>
         </div>
