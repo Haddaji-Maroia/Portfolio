@@ -450,11 +450,11 @@ p{
 /* MY HISTORY SECTION */
 
 .history-section{
-    background-image: url("./portfolio-template/images/mountains-back2.svg");
+    background-image: url("./assets/images/mountains-back2.svg");
     background-position: left bottom -30px;
     background-size: contain;
     background-repeat: no-repeat;
-    padding-bottom: 150px;
+    padding-bottom: 80px;
 }
 
 .history{
@@ -504,6 +504,10 @@ p{
 
 /* Mobile (max-width 600px) */
 @media (max-width > 600px) {
+    .history{
+        padding: 70px;
+    }
+
     .timeline {
         flex-direction: column;
         align-items: center;

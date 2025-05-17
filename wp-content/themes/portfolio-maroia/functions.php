@@ -70,7 +70,7 @@ function register_custom_post_type_projets() {
         'menu_icon' => 'dashicons-portfolio',
         'menu_position' => 5,
         'rewrite' => ['slug' => 'projets'],
-        'supports' => ['title', 'editor', 'thumbnail'],
+        'supports' => ['title', 'editor', 'thumbnail', 'page-attributes'],
         'show_in_rest' => true,
     ]);
 }

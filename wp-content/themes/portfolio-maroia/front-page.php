@@ -54,15 +54,17 @@ get_header();
     <section id="projects" class="projects-section">
         <div class="projects">
             <h2>
-                <?php $project_title = get_field('project_title'); ?>
-                <?= $project_title !== '' ? esc_html($project_title) : ''; ?>
+                <?php $project_title = get_field('project_title') ?>
+                <?= $project_title !== '' ? $project_title : '' ?>
             </h2>
 
             <div class="project-container">
                 <?php
                 $args = [
                     'post_type' => 'projets',
-                    'posts_per_page' => -1
+                    'posts_per_page' => -1,
+                    'orderby' => 'menu_order',
+                    'order' => 'ASC'
                 ];
 
                 $query = new WP_Query($args);
@@ -71,7 +73,7 @@ get_header();
                     while ($query->have_posts()) : $query->the_post();
                         $project_image = get_the_post_thumbnail_url(get_the_ID(), 'medium');
                         $project_title = get_the_title();
-                        $project_link = get_permalink(); // oppure un campo ACF personalizzato, se vuoi
+                        $project_link = get_permalink();
                         ?>
                         <article class="project">
                             <div class="floating">
@@ -110,130 +112,66 @@ get_header();
             <img class="furin furin-bottom"
                  src="<?php echo get_template_directory_uri(); ?>/assets/images/furin-bottom.svg"
                  alt="japanese bottom furin">
-            <h2>Mon histoire</h2>
+            <h2>
+                <?php $history_title = get_field('history_title') ?>
+                <?= $history_title !== '' ? $history_title : '' ?>
+            </h2>
 
             <div class="timeline">
-                <div class="experience">
-                    <p class="year"><span class="date">2015-2020</span><br>Diplôme en comptabilité en Italie</p>
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern-blue.svg"
-                         alt="lantern blue">
-                </div>
-                <div class="experience">
-                    <p class="year"><span class="date">2020-2021</span><br>Helmo Marketing</p>
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern-blue.svg"
-                         alt="lantern blue">
-                </div>
-                <div class="experience">
-                    <p class="year"><span class="date">2021-2022</span><br>École de langue française à la HEPL</p>
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern-blue.svg"
-                         alt="lantern blue">
-                </div>
-                <div class="experience">
-                    <p class="year"><span class="date">2021-2022</span><br>Helmo International Business</p>
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern-blue.svg"
-                         alt="lantern blue">
-                </div>
-                <div class="experience">
-                    <p class="year"><span class="date">2023-<span class="small">à ce jour</span></span><br>HEPL
-                        Techniques infographiques option web</p>
-                    <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern-blue.svg"
-                         alt="lantern blue">
-                </div>
+                <?php if (have_rows('experiences')): ?>
+                    <?php while (have_rows('experiences')): the_row(); ?>
+                        <?php
+                        $date = get_sub_field('date');
+                        $description = get_sub_field('description');
+                        ?>
+                        <div class="experience">
+                            <p class="year">
+                                <span class="date"><?= esc_html($date); ?></span><br>
+                                <?= esc_html($description); ?>
+                            </p>
+                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern-blue.svg" alt="lantern blue">
+                        </div>
+                    <?php endwhile; ?>
+                <?php endif; ?>
             </div>
+
         </div>
     </section>
 
     <section id="technologies" class="technologies-section">
         <div class="technogies">
-            <h2>Les outils de mon quotidien</h2>
+            <h2>
+                <?php $skill_title = get_field('skill_title') ?>
+                <?= $skill_title !== '' ? $skill_title : '' ?>
+            </h2>
             <img class="clouds2 clouds2-right"
                  src="<?php echo get_template_directory_uri(); ?>/assets/images/cloud-2.svg" alt="clouds chinese style">
             <img class="clouds2 clouds2-left"
                  src="<?php echo get_template_directory_uri(); ?>/assets/images/cloud-2.svg" alt="clouds chinese style">
             <div class="box-tech">
-                <div class="tech figma-tech">
-                    <div class="icon">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images//icons/figma.svg"
-                             alt="figma icon">
-                    </div>
-                    <div class="text wrapper">
-                        <p>Figma</p>
-                        <p>Outil de design</p>
-                    </div>
-                </div>
-                <div class="tech html-tech">
-                    <div class="icon">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/html.svg"
-                             alt="Html icon">
-                    </div>
-                    <div class="text wrapper">
-                        <p>HTML</p>
-                        <p>Structure propre et sémantique</p>
-                    </div>
-                </div>
-                <div class="tech css-tech">
-                    <div class="icon">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/css.svg"
-                             alt="Css icon">
-                    </div>
-                    <div class="text wrapper">
-                        <p>CSS</p>
-                        <p>Styles fluides et responsifs</p>
-                    </div>
-                </div>
-                <div class="tech javascript-tech">
-                    <div class="icon">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/javascript.svg"
-                             alt="JavaScript icon">
-                    </div>
-                    <div class="text wrapper">
-                        <p>JavaScript</p>
-                        <p>Interactions dynamiques</p>
-                    </div>
-                </div>
-                <div class="tech typescript-tech">
-                    <div class="icon">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/typescript.svg"
-                             alt="TypeScript icon">
-                    </div>
-                    <div class="text wrapper">
-                        <p>TypeScript</p>
-                        <p>Code structuré et typé</p>
-                    </div>
-                </div>
-                <div class="tech php-tech">
-                    <div class="icon">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/php.svg"
-                             alt="Php icon">
-                    </div>
-                    <div class="text wrapper">
-                        <p>PHP</p>
-                        <p>Back-end simple et efficace</p>
-                    </div>
-                </div>
-                <div class="tech sql-tech">
-                    <div class="icon">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/sql.svg"
-                             alt="Sql icon">
-                    </div>
-                    <div class="text wrapper">
-                        <p>SQL</p>
-                        <p>Gestion de bases de données</p>
-                    </div>
-                </div>
-                <div class="tech git-tech">
-                    <div class="icon">
-                        <img src="<?php echo get_template_directory_uri(); ?>/assets/images/icons/git.svg"
-                             alt="Git icon">
-                    </div>
-                    <div class="text wrapper">
-                        <p>Git</p>
-                        <p>Contrôle de version propre</p>
-                    </div>
-                </div>
+                <?php if (have_rows('technologies')): ?>
+                    <?php while (have_rows('technologies')): the_row();
+                        $icon = get_sub_field('icon');
+                        $title = get_sub_field('title');
+                        $subtitle = get_sub_field('subtitle');
+                        ?>
+                        <div class="tech">
+                            <div class="icon">
+                                <?php if ($icon): ?>
+                                    <img src="<?= esc_url($icon['url']); ?>" alt="<?= esc_attr($icon['alt']); ?>">
+                                <?php endif; ?>
+                            </div>
+                            <div class="text wrapper">
+                                <p><?= esc_html($title); ?></p>
+                                <p><?= esc_html($subtitle); ?></p>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
+                <?php endif; ?>
             </div>
         </div>
     </section>
+
     <section id="contactMe" class="contactMe-section">
         <div class="contact-me">
             <div class="text-wrapper">
