@@ -172,6 +172,7 @@ get_header();
         </div>
     </section>
 
+
     <section id="contactMe" class="contactMe-section">
         <div class="contact-me">
             <div class="text-wrapper">
