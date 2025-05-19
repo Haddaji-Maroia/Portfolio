@@ -6,8 +6,8 @@ get_header();
     <section id="landing" class="landing">
         <div class="content">
             <h1 class="title">
-                <?php $title = get_field('title') ?>
-                <?= $title !== '' ? $title : '' ?><br>
+                    <?php $title = get_field('title') ?>
+                    <?= $title !== '' ? $title : '' ?><br>
                 <span class="subtitle">Web developer & designer</span>
             </h1>
             <div class="clouds">
@@ -62,7 +62,7 @@ get_header();
                 <?php
                 $args = [
                     'post_type' => 'projets',
-                    'posts_per_page' => -1,
+                    'posts_per_page' => 3,
                     'orderby' => 'menu_order',
                     'order' => 'ASC'
                 ];

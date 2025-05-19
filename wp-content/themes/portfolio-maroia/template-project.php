@@ -3,10 +3,17 @@
 <?=get_header();?>
 
 
+
 <section id="projects" class="projects-section">
     <div class="projects">
-        <h2>Mes projets</h2>
-        <p>Voici une sélection de projets que j’ai réalisés durant mes études et mes expériences personnelles. Vous y trouverez des sites web, des maquettes graphiques et d’autres créations digitales.</p>
+        <h2>
+            <?php $title = get_field('title') ?>
+            <?= $title !== '' ? $title : '' ?>
+        </h2>
+        <p>
+            <?php $description = get_field('description') ?>
+            <?= $description !== '' ? $description : '' ?>
+        </p>
 
         <div class="project-container">
             <?php
@@ -25,24 +32,19 @@
                             <a class="project-card" href="<?php the_permalink(); ?>">
                                 <div class="project-cover">
                                     <figure>
-                                        <?php if (has_post_thumbnail()) : ?>
+                                        <figure>
                                             <?php the_post_thumbnail('medium'); ?>
-                                        <?php else : ?>
-                                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/default.png" alt="default">
-                                        <?php endif; ?>
-                                        <span><?php the_title(); ?></span>
+                                            <span><?php the_title(); ?></span>
+                                        </figure>
                                     </figure>
                                 </div>
                             </a>
                         </div>
                     </article>
-                <?php
-                endwhile;
+                <?php endwhile;
                 wp_reset_postdata();
-            else :
-                ?>
-                <p>Aucun projet trouvé.</p>
-            <?php endif; ?>
+            endif;
+            ?>
         </div>
 
 

@@ -84,7 +84,7 @@ p{
 .landing{
     background-color: #C4E5FC;
     height: 800px;
-    background-image: url("./portfolio-template/images/background-hero.svg");
+    background-image: url("./assets/images/background-hero.svg");
     background-position: left bottom -30px;
     background-size: contain;
     background-repeat: no-repeat;
@@ -851,8 +851,58 @@ p{
 
 /*Single Project page*/
 
-.img_project{
-    width: 150px;
+.single-project {
+    padding: 6.25rem 7.5rem;
+    background-color: #C4E5FC;
+}
+
+.single-project h1{
+    margin-bottom: 40px;
+}
+
+
+.project_presentation{
+    border-radius: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.image_cover{
+    background-color: #1e6b9d;
+    width: 378px;
+    height: 461px;
+    flex-shrink: 0;
+}
+
+
+.single-project figure img {
+    border-radius: 10px;
+    margin-bottom: 2rem;
+    width: 200px;
+    height: auto;
+}
+
+.single-project .content {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.single-project a {
+    display: inline-block;
+    margin-top: 1rem;
+    color: #fff;
+    background-color: #0073aa;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.single-project a:hover {
+    background-color: #005f8d;
 }
 
 
