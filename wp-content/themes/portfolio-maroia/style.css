@@ -49,17 +49,10 @@ p{
 
 .main-navigation {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.main-navigation {
-    display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 40px;
     position: relative;
+    width: 100%;
 }
 
 .logo {
@@ -168,6 +161,12 @@ p{
     }
 }
 
+
+@media (max-width: 700px) {
+    header{
+        padding: 30px 40px;
+    }
+}
 
 
 
@@ -439,14 +438,23 @@ p{
     text-align: center;
 }
 
+
+@media (max-width: 700px) {
+    .projects{
+        padding: 50px 80px;
+    }
+}
+
+
+
 /* MY HISTORY SECTION */
 
 .history-section{
-    background-image: url("./portfolio-template/images/mountains-back2.svg");
+    background-image: url("./assets/images/mountains-back2.svg");
     background-position: left bottom -30px;
     background-size: contain;
     background-repeat: no-repeat;
-    padding-bottom: 150px;
+    padding-bottom: 80px;
 }
 
 .history{
@@ -496,6 +504,10 @@ p{
 
 /* Mobile (max-width 600px) */
 @media (max-width > 600px) {
+    .history{
+        padding: 70px;
+    }
+
     .timeline {
         flex-direction: column;
         align-items: center;
@@ -773,6 +785,17 @@ p{
 .contacts, .lists, .navigation, .social{
     list-style: none;
 }
+
+
+.link-menu:hover{
+    text-decoration: underline;
+}
+
+.menu-title{
+    font-size: 1.3rem;
+    font-weight: bold;
+}
+
 
 @media (max-width: 800px) {
     .menus {

@@ -20,9 +20,14 @@
 <body>
 <header>
     <nav class="main-navigation" role="navigation">
-        <img class="logo" src="images/logoMH.svg" alt="vers la page d'accueil">
+        <?php
+        if ( function_exists( 'the_custom_logo' ) ) {
+            $custom_logo_id = get_theme_mod( 'custom_logo' );
+            $logo = wp_get_attachment_image_src( $custom_logo_id );
+        }
+        ?>
+        <img class="logo" src="<?php echo $logo[0] ?> " alt="vers la page d'accueil">
 
-        <input type="checkbox" id="menu-toggle" class="menu-toggle">
         <label for="menu-toggle" class="navbar__toggle">
             <span class="bar"></span>
             <span class="bar"></span>
@@ -30,15 +35,29 @@
         </label>
 
         <div class="container">
+
+            <?php
+            wp_nav_menu(
+                    array(
+                            'menu' => 'primary',
+                            'container' => '',
+                            'theme_location' => 'primary',
+                            'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+
+                        //continue nav minuto 1:10:10
+                    )
+            )
+            ?>
+
+
             <ul class="menu">
-                <li><a href="#landing">Accueil</a></li>
-                <li><a href="#aboutMe">About me</a></li>
-                <li><a href="#projects">Projets</a></li>
-                <li><a href="#history">Mon histoire</a></li>
-                <li><a href="#contactMe">Contact</a></li>
+                <li><a href="<?php echo home_url(); ?>/#landing">Accueil</a></li>
+                <li><a href="<?php echo home_url(); ?>/#aboutMe">About me</a></li>
+                <li><a href="<?php echo get_permalink( get_page_by_path('mes-projets') ); ?>">Projets</a></li>
+                <li><a href="<?php echo home_url(); ?>/#history">Mon histoire</a></li>
+                <li><a href="<?php echo home_url(); ?>/#contactMe">Contact</a></li>
                 <li><a href="">EN</a></li>
             </ul>
         </div>
     </nav>
 </header>
-
