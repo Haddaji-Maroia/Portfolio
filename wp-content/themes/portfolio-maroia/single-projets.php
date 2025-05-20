@@ -50,16 +50,15 @@
 
         <?php
 
-        // Check rows exists.
         if (have_rows('about_project')) : ?>
 
             <div class="explaination">
 
                 <?php
-                // Loop through rows.
+
                 while (have_rows('about_project')) : the_row();
 
-                    // Load sub field values.
+
                     $title = get_sub_field('title');
                     $description = get_sub_field('description');
                     ?>
@@ -76,16 +75,15 @@
                     </div>
 
                 <?php
-                    // End loop.
+
                 endwhile;
                 ?>
 
             </div>
 
         <?php
-// No value.
         else :
-            echo '<p>Nessuna sezione disponibile al momento.</p>';
+            echo '<p>no section</p>';
         endif;
         ?>
 
