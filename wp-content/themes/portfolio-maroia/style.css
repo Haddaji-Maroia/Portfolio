@@ -905,6 +905,17 @@ p{
     background-color: #005f8d;
 }
 
+.tech_title{
+    margin-bottom: 20px;
+}
+
+.tech-badge{
+    background-color: #1e6b9d;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;
+}
+
 
 
 

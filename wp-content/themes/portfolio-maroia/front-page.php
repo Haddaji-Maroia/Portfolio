@@ -117,23 +117,40 @@ get_header();
                 <?= $history_title !== '' ? $history_title : '' ?>
             </h2>
 
-            <div class="timeline">
-                <?php if (have_rows('experiences')): ?>
-                    <?php while (have_rows('experiences')): the_row(); ?>
-                        <?php
+            <?php
+            if (have_rows('experiences')) : ?>
+
+                <div class="timeline">
+
+                    <?php
+                    while (have_rows('experiences')) : the_row();
+
+
                         $date = get_sub_field('date');
                         $description = get_sub_field('description');
                         ?>
+
                         <div class="experience">
                             <p class="year">
-                                <span class="date"><?= esc_html($date); ?></span><br>
-                                <?= esc_html($description); ?>
+                                <?php if (!empty($date)) : ?>
+                                    <span class="date"><?= esc_html($date); ?></span><br>
+                                <?php endif; ?>
+
+                                <?php if (!empty($description)) : ?>
+                                    <?= esc_html($description); ?>
+                                <?php endif; ?>
                             </p>
-                            <img src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern-blue.svg" alt="lantern blue">
+
+                            <img src="<?= get_template_directory_uri(); ?>/assets/images/lantern-blue.svg" alt="lantern blue">
                         </div>
+
                     <?php endwhile; ?>
-                <?php endif; ?>
-            </div>
+                </div>
+
+            <?php else : ?>
+                <p>No experience...</p>
+            <?php endif; ?>
+
 
         </div>
     </section>
