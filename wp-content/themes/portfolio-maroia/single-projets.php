@@ -15,23 +15,30 @@
 
             <div class="text_projet">
                 <a href="<?php echo get_permalink(get_page_by_path('mes-projets')); ?>">← Tous les projets</a>
-                <p>
-                    <?php $description = get_field('description') ?>
-                    <?= $description !== '' ? $description : '' ?>
-                </p>
-                <a href="">Link Figma</a>
+                <?php
+                $description = get_field('description_projet');
+                if (!empty($description)) : ?>
+                    <p><?= esc_html($description); ?></p>
+                <?php endif; ?>
+
+                <?php
+                $figma_link = get_field('figma_link');
+                if (!empty($figma_link)) : ?>
+                    <a href="<?= esc_url($figma_link); ?>" target="_blank" rel="noopener noreferrer">Link Figma</a>
+                <?php endif; ?>
+
                 <p class="tech_title"><strong>Technologies :</strong></p>
 
                 <?php
-                // Check if the repeater field has rows of data
+
                 if (have_rows('technologies')) : ?>
                     <div class="bloc_technologies">
                         <?php
-                        // Loop through the rows of data
+
                         while (have_rows('technologies')) : the_row();
-                            // Get sub field value
+
                             $tech_name = get_sub_field('technology_name');
-                            // Output if not empty
+
                             if (!empty($tech_name)) :
                                 ?>
                                 <span class="tech-badge"><?= esc_html($tech_name); ?></span>

@@ -1,0 +1,97 @@
+@import "../settings/fonts";
+
+.technologies-section {
+  min-height: 800px;
+  background: linear-gradient(#dae7f7, #fff, #97d7f2);
+
+  .technogies {
+    padding: 100px 120px;
+    position: relative;
+
+    h2 {
+      font-family: var(--font-title), serif;
+      font-weight: bold;
+      margin-bottom: 100px;
+    }
+
+    .text-wrapper{
+      font-family: var(--font-base) ,serif;
+    }
+    .tech__title{
+      font-weight: bold;
+    }
+
+    .box-tech {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-auto-rows: auto;
+      gap: 40px;
+      padding: 0 20px;
+    }
+
+    .tech {
+      background-color: #aed2eb;
+      padding: 14px;
+      display: flex;
+
+      .icon {
+        background-color: #438bbc;
+        padding: 8px;
+        margin-right: 12px;
+        height: 30px;
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+    .clouds2-right {
+      position: absolute;
+      top: 100px;
+      right: 30px;
+    }
+
+    .clouds2-left {
+      position: absolute;
+      bottom: 10px;
+      left: 30px;
+    }
+
+    .clouds2 {
+      animation: oscillate 2s ease-in-out infinite alternate;
+    }
+  }
+}
+
+@media (max-width: 780px) {
+  .technogies {
+    padding: 50px 20px;
+
+    .box-tech {
+      grid-template-columns: 1fr !important;  // FORZA 1 COLONNA
+      gap: 30px;
+      padding: 0 10px;
+    }
+
+    .tech {
+      justify-content: flex-start;  // Allinea icona e testo a sinistra
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .box-tech {
+    grid-template-columns: 1fr;
+    padding: 0 10px;
+  }
+}
+
+@keyframes oscillate {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(20px);
+  }
+}

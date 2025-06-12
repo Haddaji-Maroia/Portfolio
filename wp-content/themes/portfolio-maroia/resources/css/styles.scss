@@ -1,1 +1,10 @@
-@use './general/hero' as *;
+@use 'general/hero';
+@use 'general/aboutMe';
+@use  'general/projects';
+@use  'general/experience';
+@use 'general/skills';
+@use 'general/contat';
+@use 'general/header';
+@use 'general/footer';
+@use 'general/error';
+@use 'general/single-project';

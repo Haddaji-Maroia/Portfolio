@@ -1,0 +1,68 @@
+@import "../settings/fonts";
+
+footer {
+  background-color: #428BBC;
+  padding: 60px 40px;
+  color: #333;
+
+  nav.footer-nav {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 40px;
+
+    .footer-column {
+      flex: 1 1 200px;
+      max-width: 300px;
+
+      h3 {
+        font-size: 1.4rem;
+        margin-bottom: 20px;
+        color: #C4E5FC;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          margin-bottom: 10px;
+          font-size: 1rem;
+
+          a {
+            text-decoration: none;
+            color: #333;
+            transition: color 0.3s;
+
+            &:hover {
+              color: #C4E5FC;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer-bottom {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 0.9rem;
+    border-top: 1px solid #C4E5FC;
+    padding-top: 20px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 40px 20px;
+
+    nav.footer-nav {
+      flex-direction: column;
+      gap: 30px;
+
+      .footer-column {
+        max-width: 100%;
+      }
+    }
+  }
+}

@@ -1,3 +1,7 @@
+@import "../settings/fonts";
+
+
+
 * {
   margin: 0;
   padding: 0;
@@ -16,60 +20,16 @@ html {
 
 /* TYPOGRAPHY */
 h1, h2, h3 {
-  font-family: "Playfair Display", serif;
+  font-family: var(--font-title), serif;
+  font-weight: bold;
 }
 
 p {
-  font-family: "Lora", serif;
+  font-family: var(--font-base), serif;
 }
 
 /* HERO SECTION */
-header {
-  background: #C4E5FC;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 30px 100px;
-  position: relative;
 
-  @media (max-width: 700px) {
-    padding: 30px 40px;
-  }
-}
-
-.main-navigation {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  width: 100%;
-}
-
-.logo {
-  height: 50px;
-  cursor: pointer;
-}
-
-.container {
-  margin-left: auto;
-}
-
-.menu {
-  list-style: none;
-  display: flex;
-  gap: 50px;
-  margin: 0;
-  padding: 0;
-
-  a {
-    text-decoration: none;
-    color: #1572B6;
-
-    &:hover {
-      color: #0c5172;
-    }
-  }
-}
 
 .landing {
   background-color: #C4E5FC;
@@ -78,6 +38,7 @@ header {
   background-position: left bottom -30px;
   background-size: contain;
   background-repeat: no-repeat;
+
 }
 
 .title {

@@ -1,0 +1,139 @@
+@import "../settings/fonts";
+
+.contact-me {
+  background: linear-gradient(#97d7f2, #ffff, #428bbc);
+  padding: 20px 120px 100px;
+
+  h2 {
+    font-family: var(--font-title), serif;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .contact__paragraphe{
+    font-family: var(--font-base), serif;
+  }
+
+  .contact-main {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    position: relative;
+
+    .cloudsContact {
+      .clouds-contact {
+        animation: oscillate 2s ease-in-out infinite alternate;
+      }
+    }
+
+    .form-section {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+
+      .form-container {
+        width: 100%;
+        max-width: 500px;
+
+        .form {
+          background-color: #428bbc;
+          padding: 30px;
+          border-radius: 10px;
+          width: 100%;
+          max-width: 500px;
+          color: white;
+
+          h2 {
+            font-family: var(--font-title), serif;
+            font-weight: bold;
+            margin-bottom: 10px;
+          }
+
+
+          .form-input-wrapper {
+            margin-bottom: 15px;
+
+            label{
+              font-family: var(--font-base), serif;
+            }
+
+            input,
+            textarea {
+              width: 100%;
+              padding: 8px;
+              border-radius: 5px;
+              border: none;
+              box-sizing: border-box;
+              margin-top: 10px;
+            }
+          }
+
+          .btn-form {
+            font-family: var(--font-base), serif;
+            background-color: #ffff;
+            padding: 10px 40px;
+            margin: 20px auto;
+            border: none;
+            border-radius: 10px;
+            color: #428bbc;
+            cursor: pointer;
+            display: block;
+
+            &:hover {
+              background-color: #053957;
+              color: #ffff;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .text-wrapper {
+    flex: 1;
+    margin-bottom: 30px;
+
+    h2 {
+      margin-bottom: 20px;
+    }
+  }
+
+  @media (max-width: 800px) {
+    padding: 100px 40px;
+
+    .contact-main {
+      flex-direction: column;
+      align-items: center;
+
+      .form-container {
+        max-width: 400px;
+        display: flex;
+        justify-content: center;
+        margin-top: 40px;
+      }
+
+      .cloudsContact {
+        .clouds-contact {
+          position: absolute;
+          top: -178px;
+          right: -2px;
+        }
+      }
+    }
+
+    .text-wrapper {
+      margin-bottom: 100px;
+    }
+  }
+}
+
+// Animazione oscillate
+@keyframes oscillate {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(20px);
+  }
+}

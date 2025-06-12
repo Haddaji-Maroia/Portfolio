@@ -1,0 +1,114 @@
+.about-me {
+  padding: 50px;
+}
+.about-me .presentation {
+  position: relative;
+  padding: 100px 70px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 40px;
+  color: #428BBC;
+}
+.about-me .presentation h2 {
+  margin-bottom: 40px;
+}
+.about-me .presentation .text-about p {
+  font-size: 1rem;
+  margin-bottom: 20px;
+  line-height: 1.6;
+  margin-right: 30px;
+}
+@media (max-width: 900px) {
+  .about-me .presentation {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+}
+@media (max-width: 600px) {
+  .about-me .presentation {
+    flex-direction: column-reverse;
+  }
+}
+@media (max-width: 900px) {
+  .about-me .circle {
+    margin-top: 30px;
+  }
+}
+
+/* decorations corner */
+.corner-about {
+  position: absolute;
+  z-index: 0;
+}
+.corner-about.corner-top-left-about {
+  top: -250px;
+  left: -150px;
+}
+.corner-about.corner-bottom-right-about {
+  transform: rotate(180deg);
+  right: -150px;
+  top: 360px;
+}
+
+/* decorations illustration */
+.illustration {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.illustration .circle-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+@media (max-width: 900px) {
+  .illustration .circle-container {
+    width: 150px;
+    height: 150px;
+  }
+}
+.illustration .circle {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.illustration .avatar {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: auto;
+}
+.illustration .lantern {
+  width: 150px;
+  position: absolute;
+  top: -50px;
+  right: -10px;
+  animation: swing 3s ease-in-out infinite;
+  transform-origin: top center;
+}
+@media (max-width: 900px) {
+  .illustration .lantern {
+    width: 90px;
+  }
+}
+
+@keyframes swing {
+  0% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(5deg);
+  }
+}
+
+/*# sourceMappingURL=aboutMe.css.map */

@@ -23,6 +23,7 @@ get_header();
             <canvas id="treeCanvas" width="600" height="600"></canvas>
         </div>
     </section>
+
     <section id="aboutMe" class="about-me">
         <div class="presentation">
             <div class="text-about">
@@ -39,7 +40,7 @@ get_header();
                          alt="my own illustration">
                 </div>
             </div>
-            <img class="lantern" src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern.svg"
+            <img class="lantern__chinese" src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern.svg"
                  alt="chinese lantern">
             <img class="corner-about corner-top-left-about"
                  src="<?php echo get_template_directory_uri(); ?>/assets/images/frame-decoration.svg"
@@ -179,7 +180,7 @@ get_header();
                                 <?php endif; ?>
                             </div>
                             <div class="text wrapper">
-                                <p><?= esc_html($title); ?></p>
+                                <p class="tech__title"><?= esc_html($title); ?></p>
                                 <p><?= esc_html($subtitle); ?></p>
                             </div>
                         </div>
@@ -194,7 +195,7 @@ get_header();
         <div class="contact-me">
             <div class="text-wrapper">
                 <h2>Un mot, un souffle </h2>
-                <p>Je serais ravie d’échanger autour d’un projet, d’une idée ou simplement d’un rêve partagé.</p>
+                <p class="contact__paragraphe">Je serais ravie d’échanger autour d’un projet, d’une idée ou simplement d’un rêve partagé.</p>
             </div>
             <div class="contact-main">
                 <div class="cloudsContact">

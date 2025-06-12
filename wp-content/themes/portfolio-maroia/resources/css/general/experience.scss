@@ -1,0 +1,137 @@
+@import "../settings/fonts";
+
+.history-section {
+  background-image: url("/wp-content/themes/portfolio-maroia/assets/images/mountains-back2.svg");
+  background-position: left bottom -30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-bottom: 80px;
+
+  .history {
+    padding: 100px 120px;
+    position: relative;
+
+    img.furin {
+      width: 60px;
+      position: absolute;
+      top: -1px;
+      right: 130px;
+
+      &.furin-top {
+        animation: swing 3s ease-in-out infinite;
+        transform-origin: top center;
+      }
+
+      &.furin-bottom {
+        width: 20px;
+        top: 48px;
+        right: 150px;
+        animation: swing 2s ease-in-out infinite;
+        transform-origin: top center;
+        z-index: -1;
+      }
+    }
+
+    h2 {
+      font-family: var(--font-title), serif;
+      font-weight: bold;
+    }
+
+    .timeline {
+      display: flex;
+      justify-content: space-around;
+      flex-wrap: wrap;
+      gap: 60px;
+      padding: 100px 0;
+
+      .experience {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        max-width: 150px;
+        position: relative;
+
+        img {
+          width: 180px;
+        }
+
+        .year {
+          font-family: var(--font-base), serif;
+          margin-bottom: 10px;
+          color: #1e6b9d;
+          font-size: 14px;
+          line-height: 1.4;
+          position: absolute;
+          top: 25%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+        }
+
+        .date {
+          font-family: var(--font-title), serif;
+          font-weight: bold;
+          color: #8b6e28;
+          font-size: 18px;
+        }
+
+        .small {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+/* MEDIA QUERIES */
+
+/* Tablet (max-width 992px) */
+@media (max-width: 992px) {
+  .history {
+    .timeline {
+      gap: 50px;
+
+      .experience {
+        max-width: 130px;
+
+        img {
+          width: 170px;
+        }
+      }
+    }
+  }
+}
+
+/* Mobile (max-width 600px) */
+@media (max-width: 600px) {
+  .history {
+    padding: 70px;
+
+    .timeline {
+      flex-direction: column;
+      align-items: center;
+
+      .experience {
+        max-width: none;
+        width: 100%;
+
+        img {
+          width: 160px;
+        }
+      }
+    }
+  }
+}
+
+/* Animation keyframe */
+@keyframes swing {
+  0% {
+    transform: rotate(5deg);
+  }
+  50% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(5deg);
+  }
+}

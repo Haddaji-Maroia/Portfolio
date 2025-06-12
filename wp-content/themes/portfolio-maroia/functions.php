@@ -17,6 +17,7 @@ function portfolio_enqueue_assets() {
         );
     }
 
+
     // JS
     if (isset($manifest['resources/js/main.js']['file'])) {
         wp_enqueue_script(
