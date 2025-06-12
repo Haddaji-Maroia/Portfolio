@@ -1,5 +1,5 @@
 <?php
-global $title, $post_new_file, $post_type_object, $post;
+global $description_project, $post_new_file, $post_type_object, $post;
 $acf_title_placeholder = apply_filters( 'enter_title_here', __( 'Add title', 'secure-custom-fields' ), $post );
 $acf_title             = $post->post_title;
 $acf_post_type         = is_object( $post_type_object ) ? $post_type_object->name : '';
@@ -66,7 +66,7 @@ if ( 'acf-field-group' === $acf_post_type ) {
 		<div class="acf-headerbar-content">
 			<h1 class="acf-page-title">
 				<?php
-				echo esc_html( $title );
+				echo esc_html( $description_project );
 
 				if ( ! empty( $acf_duplicated_from ) ) {
 					echo '<span class="acf-duplicated-from">' . esc_html( $acf_duplicated_from ) . '</span>';

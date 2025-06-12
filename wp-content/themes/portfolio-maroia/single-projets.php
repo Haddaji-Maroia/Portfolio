@@ -15,16 +15,25 @@
 
             <div class="text_projet">
                 <a href="<?php echo get_permalink(get_page_by_path('mes-projets')); ?>">← Tous les projets</a>
-                <?php
-                $description = get_field('description_projet');
-                if (!empty($description)) : ?>
-                    <p><?= esc_html($description); ?></p>
-                <?php endif; ?>
 
-                <?php
-                $figma_link = get_field('figma_link');
-                if (!empty($figma_link)) : ?>
-                    <a href="<?= esc_url($figma_link); ?>" target="_blank" rel="noopener noreferrer">Link Figma</a>
+                <p>
+                    <?php $description_project = get_field('description_project') ?>
+                    <?= $description_project !== '' ? $description_project : '' ?>
+                </p>
+
+                <?php if (have_rows('link_project')) : ?>
+                    <div class="project-links">
+                        <?php while (have_rows('link_project')) : the_row();
+                            $link_name = get_sub_field('link_name');
+                            $link_url = get_sub_field('link_url');
+                            ?>
+                            <?php if ($link_name && $link_url) : ?>
+                                <a href="<?= esc_url($link_url); ?>" target="_blank" rel="noopener noreferrer">
+                                    <?= esc_html($link_name); ?>
+                                </a>
+                            <?php endif; ?>
+                        <?php endwhile; ?>
+                    </div>
                 <?php endif; ?>
 
                 <p class="tech_title"><strong>Technologies :</strong></p>
@@ -55,22 +64,12 @@
             </div>
         </div>
 
-        <?php
-
-        if (have_rows('about_project')) : ?>
-
+        <?php if (have_rows('about_project')) : ?>
             <div class="explaination">
-
-                <?php
-
-                while (have_rows('about_project')) : the_row();
-
-
-                    $title = get_sub_field('title');
-                    $description = get_sub_field('description');
+                <?php while (have_rows('about_project')) : the_row();
+                    $title = get_sub_field('title_box_description');
+                    $description = get_sub_field('explications');
                     ?>
-
-
                     <div class="cardproject">
                         <?php if (!empty($title)) : ?>
                             <h3><?= esc_html($title); ?></h3>
@@ -80,21 +79,12 @@
                             <p><?= esc_html($description); ?></p>
                         <?php endif; ?>
                     </div>
-
-                <?php
-
-                endwhile;
-                ?>
-
+                <?php endwhile; ?>
             </div>
+        <?php else : ?>
+            <p>no section</p>
+        <?php endif; ?>
 
-        <?php
-        else :
-            echo '<p>no section</p>';
-        endif;
-        ?>
-
-    </div>
 </section>
 
 <?php get_footer(); ?>

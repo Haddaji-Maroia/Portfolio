@@ -20,7 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @global string       $title            The title of the current screen.
  * @global array        $wp_meta_boxes    Global meta box state.
  */
-global $post_type, $post_type_object, $post, $title, $wp_meta_boxes;
+global $post_type, $post_type_object, $post, $description_project, $wp_meta_boxes;
 
 $block_editor_context = new WP_Block_Editor_Context( array( 'post' => $post ) );
 
@@ -377,7 +377,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 ?>
 
 <div class="block-editor">
-	<h1 class="screen-reader-text hide-if-no-js"><?php echo esc_html( $title ); ?></h1>
+	<h1 class="screen-reader-text hide-if-no-js"><?php echo esc_html( $description_project ); ?></h1>
 	<div id="editor" class="block-editor__container hide-if-no-js"></div>
 	<div id="metaboxes" class="hidden">
 		<?php the_block_editor_meta_boxes(); ?>
@@ -385,7 +385,7 @@ require_once ABSPATH . 'wp-admin/admin-header.php';
 
 	<?php // JavaScript is disabled. ?>
 	<div class="wrap hide-if-js block-editor-no-js">
-		<h1 class="wp-heading-inline"><?php echo esc_html( $title ); ?></h1>
+		<h1 class="wp-heading-inline"><?php echo esc_html( $description_project ); ?></h1>
 		<?php
 		if ( file_exists( WP_PLUGIN_DIR . '/classic-editor/classic-editor.php' ) ) {
 			// If Classic Editor is already installed, provide a link to activate the plugin.

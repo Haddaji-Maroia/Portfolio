@@ -2040,10 +2040,10 @@ function get_admin_page_parent( $parent_page = '' ) {
  * @return string The title of the current admin page.
  */
 function get_admin_page_title() {
-	global $title, $menu, $submenu, $pagenow, $typenow, $plugin_page;
+	global $description_project, $menu, $submenu, $pagenow, $typenow, $plugin_page;
 
-	if ( ! empty( $title ) ) {
-		return $title;
+	if ( ! empty( $description_project ) ) {
+		return $description_project;
 	}
 
 	$hook = get_plugin_page_hook( $plugin_page, $pagenow );
@@ -2055,15 +2055,15 @@ function get_admin_page_title() {
 		foreach ( (array) $menu as $menu_array ) {
 			if ( isset( $menu_array[3] ) ) {
 				if ( $menu_array[2] === $pagenow ) {
-					$title = $menu_array[3];
+					$description_project = $menu_array[3];
 					return $menu_array[3];
 				} elseif ( isset( $plugin_page ) && $plugin_page === $menu_array[2] && $hook === $menu_array[5] ) {
-					$title = $menu_array[3];
+					$description_project = $menu_array[3];
 					return $menu_array[3];
 				}
 			} else {
-				$title = $menu_array[0];
-				return $title;
+				$description_project = $menu_array[0];
+				return $description_project;
 			}
 		}
 	} else {
@@ -2077,7 +2077,7 @@ function get_admin_page_title() {
 						|| 'admin.php' === $pagenow && $parent1 !== $submenu_array[2]
 						|| ! empty( $typenow ) && "$pagenow?post_type=$typenow" === $parent )
 					) {
-						$title = $submenu_array[3];
+						$description_project = $submenu_array[3];
 						return $submenu_array[3];
 				}
 
@@ -2086,29 +2086,29 @@ function get_admin_page_title() {
 				}
 
 				if ( isset( $submenu_array[3] ) ) {
-					$title = $submenu_array[3];
+					$description_project = $submenu_array[3];
 					return $submenu_array[3];
 				} else {
-					$title = $submenu_array[0];
-					return $title;
+					$description_project = $submenu_array[0];
+					return $description_project;
 				}
 			}
 		}
-		if ( empty( $title ) ) {
+		if ( empty( $description_project ) ) {
 			foreach ( $menu as $menu_array ) {
 				if ( isset( $plugin_page )
 					&& $plugin_page === $menu_array[2]
 					&& 'admin.php' === $pagenow
 					&& $parent1 === $menu_array[2]
 				) {
-						$title = $menu_array[3];
+						$description_project = $menu_array[3];
 						return $menu_array[3];
 				}
 			}
 		}
 	}
 
-	return $title;
+	return $description_project;
 }
 
 /**

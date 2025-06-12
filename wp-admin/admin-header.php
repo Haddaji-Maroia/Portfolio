@@ -29,7 +29,7 @@ if ( ! defined( 'WP_ADMIN' ) ) {
  * @global string    $parent_file
  * @global string    $typenow            The post type of the current screen.
  */
-global $title, $hook_suffix, $current_screen, $wp_locale, $pagenow,
+global $description_project, $hook_suffix, $current_screen, $wp_locale, $pagenow,
 	$update_title, $total_update_count, $parent_file, $typenow;
 
 // Catch plugins that include admin-header.php before admin.php completes.
@@ -38,7 +38,7 @@ if ( empty( $current_screen ) ) {
 }
 
 get_admin_page_title();
-$title = strip_tags( $title );
+$description_project = strip_tags( $description_project );
 
 if ( is_network_admin() ) {
 	/* translators: Network admin screen title. %s: Network title. */
@@ -50,11 +50,11 @@ if ( is_network_admin() ) {
 	$admin_title = get_bloginfo( 'name' );
 }
 
-if ( $admin_title === $title ) {
+if ( $admin_title === $description_project ) {
 	/* translators: Admin screen title. %s: Admin screen name. */
-	$admin_title = sprintf( __( '%s &#8212; WordPress' ), $title );
+	$admin_title = sprintf( __( '%s &#8212; WordPress' ), $description_project );
 } else {
-	$screen_title = $title;
+	$screen_title = $description_project;
 
 	if ( 'post' === $current_screen->base && 'add' !== $current_screen->action ) {
 		$post_title = get_the_title();
@@ -86,7 +86,7 @@ if ( wp_is_recovery_mode() ) {
  * @param string $admin_title The page title, with extra context added.
  * @param string $title       The original page title.
  */
-$admin_title = apply_filters( 'admin_title', $admin_title, $title );
+$admin_title = apply_filters( 'admin_title', $admin_title, $description_project );
 
 wp_user_settings();
 

@@ -94,7 +94,7 @@ do_action( 'widgets_admin_page' );
 <div id="widgets-editor" class="blocks-widgets-container">
 	<?php // JavaScript is disabled. ?>
 	<div class="wrap hide-if-js widgets-editor-no-js">
-		<h1 class="wp-heading-inline"><?php echo esc_html( $title ); ?></h1>
+		<h1 class="wp-heading-inline"><?php echo esc_html( $description_project ); ?></h1>
 		<?php
 		if ( file_exists( WP_PLUGIN_DIR . '/classic-widgets/classic-widgets.php' ) ) {
 			// If Classic Widgets is already installed, provide a link to activate the plugin.
