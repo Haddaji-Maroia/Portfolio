@@ -1,0 +1,19 @@
+{
+  "name": "portfolio-maroia",
+  "version": "1.0.0",
+  "main": "package.json.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "sass": "^1.89.2",
+    "vite": "^6.3.5"
+  },
+  "dependencies": {
+    "glob": "^11.0.2"
+  }
+}

@@ -47,4 +47,5 @@
         <p>&copy; 2025 Maroia Haddaji. Tous droits résérvés.</p>
     </div>
 </footer>
+</body>
 </html>
