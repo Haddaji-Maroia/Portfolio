@@ -1,5 +1,5 @@
-import {defineConfig} from "vite";
-import {globSync} from "glob";
+import { defineConfig } from "vite";
+import { globSync } from "glob";
 import * as fs from "fs";
 
 export default defineConfig({
@@ -8,14 +8,9 @@ export default defineConfig({
         {
             name: "bundle.js",
             buildStart() {
-                // Récupère tous les fichiers JS dans le répertoire spécifié
-                const files = globSync("./wp-content/themes/portfolio-maroia/resources/js/app/**/*.js");
-
-                // Fusionner tous les fichiers JS en un seul
+                const files = globSync("resources/js/app/**/*.js");
                 const combinedJS = files.map(file => fs.readFileSync(file, "utf-8")).join("\n");
-
-                // Crée le fichier combiné dans le dossier de sortie
-                fs.writeFileSync("./wp-content/themes/portfolio-maroia/resources/js/main.js", combinedJS);
+                fs.writeFileSync("resources/js/main.js", combinedJS);
             },
         },
     ],
@@ -23,14 +18,14 @@ export default defineConfig({
         manifest: true,
         rollupOptions: {
             input: {
-                js: "./wp-content/themes/portfolio-maroia/resources/js/main.js",
-                css: "./wp-content/themes/portfolio-maroia/resources/css/styles.scss",
+                js: "resources/js/main.js",
+                css: "resources/css/styles.scss",
             },
             output: {
-                dir: "./wp-content/themes/portfolio-maroia/public",
+                dir: "public",
             },
         },
         assetsInlineLimit: 0,
-        target: ["es2015"], // Rendre compatible le JAVASCRIPT
+        target: ["es2015"],
     },
 });

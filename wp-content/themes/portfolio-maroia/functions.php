@@ -4,6 +4,33 @@ add_filter('use_block_editor_for_post', '__return_false');
 // Disable Gutenberg for widgets.
 add_filter('use_widgets_block_editor', '__return_false');
 
+
+
+function portfolio_enqueue_assets() {
+    $manifest = json_decode(file_get_contents(get_template_directory() . '/public/.vite/manifest.json'), true);
+
+    // CSS
+    if (isset($manifest['resources/css/styles.scss']['file'])) {
+        wp_enqueue_style(
+            'portfolio-style',
+            get_template_directory_uri() . '/public/' . $manifest['resources/css/styles.scss']['file']
+        );
+    }
+
+    // JS
+    if (isset($manifest['resources/js/main.js']['file'])) {
+        wp_enqueue_script(
+            'portfolio-script',
+            get_template_directory_uri() . '/public/' . $manifest['resources/js/main.js']['file'],
+            [],
+            null,
+            true
+        );
+    }
+}
+add_action('wp_enqueue_scripts', 'portfolio_enqueue_assets');
+
+
 function portfoliomaroia_theme_support(){
     //Add Dynamic title tag support
     add_theme_support( 'title-tag' );
@@ -40,14 +67,6 @@ function portfolio_maroia_register_styles() {
 add_action('wp_enqueue_scripts', 'portfolio_maroia_register_styles');
 
 
-
-function portfoliomaroia_register_scripts() {
-
-    // For js scripts still not ready (video minuto 33:00)
-
-}
-
-add_action('wp_enqueue_scripts', 'portfoliomaroia_register_scripts');
 add_filter('show_admin_bar', '__return_false');
 
 function my_own_mime_types($mimes) {

@@ -1,0 +1,13 @@
+{
+  "resources/css/styles.scss": {
+    "file": "assets/css-CywXAevb.css",
+    "src": "resources/css/styles.scss",
+    "isEntry": true
+  },
+  "resources/js/main.js": {
+    "file": "assets/js-BN5mhZfn.js",
+    "name": "js",
+    "src": "resources/js/main.js",
+    "isEntry": true
+  }
+}

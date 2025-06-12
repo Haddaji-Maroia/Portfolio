@@ -1,0 +1,153 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  color: #428BBC;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* HERO SECTION */
+header {
+  background: #C4E5FC;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 100px;
+  position: relative;
+}
+
+h1, h2, h3 {
+  font-family: "Playfair Display", serif;
+}
+
+p {
+  font-family: "Lora", serif;
+}
+
+.main-navigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+}
+
+.logo {
+  height: 50px;
+  cursor: pointer;
+}
+
+.container {
+  margin-left: auto;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 50px;
+  margin: 0;
+  padding: 0;
+}
+
+.menu a {
+  text-decoration: none;
+  color: #1572B6;
+}
+
+.menu a:hover {
+  color: #0c5172;
+}
+
+.landing {
+  background-color: #C4E5FC;
+  height: 800px;
+  background-image: url("./assets/images/background-hero.svg");
+  background-position: left bottom -30px;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.title {
+  text-align: center;
+  font-size: 74px;
+  font-weight: 400;
+  margin-top: 164px;
+  color: #428BBC;
+  line-height: 0.8;
+}
+
+.subtitle {
+  font-size: 32px;
+  font-weight: 400;
+  margin-top: 0;
+}
+
+.content {
+  padding: 20px;
+  z-index: 1;
+}
+
+.tree-canvas {
+  position: absolute;
+  top: 100px;
+  left: 0;
+  height: 100%;
+  z-index: 2;
+}
+
+#treeCanvas {
+  width: 100%;
+  height: auto;
+  background: transparent;
+}
+
+/* Clouds animation*/
+.clouds {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  overflow: hidden;
+}
+
+.cloud {
+  position: absolute;
+  width: 100px;
+}
+
+.cloud-left {
+  top: 62px;
+  left: 283px;
+}
+
+.cloud-right {
+  top: 23px;
+  right: 61px;
+}
+
+.oscillate {
+  animation: oscillate 2s ease-in-out infinite alternate;
+}
+
+@keyframes oscillate {
+  0% {
+    transform: translateX(0px);
+  }
+  100% {
+    transform: translateX(20px);
+  }
+}
+@media (max-width: 700px) {
+  header {
+    padding: 30px 40px;
+  }
+}
+
+/*# sourceMappingURL=hero.css.map */
