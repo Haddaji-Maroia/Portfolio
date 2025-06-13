@@ -9,7 +9,7 @@
         <div class="project_presentation">
             <div class="image_cover">
                 <?php if (has_post_thumbnail()) : ?>
-                    <figure><?php the_post_thumbnail('large'); ?></figure>
+                    <figure><?php the_post_thumbnail('medium'); ?></figure>
                 <?php endif; ?>
             </div>
 
@@ -86,6 +86,21 @@
         <?php endif; ?>
 
 </section>
+
+<?php
+$gallery = get_field('galerie_projects'); // sostituisci col tuo campo ACF se ha un altro nome
+
+if ($gallery): ?>
+    <section class="project-gallery container">
+        <h2>Galerie</h2>
+        <?php foreach ($gallery as $image): ?>
+            <figure>
+                <img src="<?= esc_url($image['sizes']['medium']); ?>" alt="<?= esc_attr($image['alt']); ?>">
+            </figure>
+        <?php endforeach; ?>
+    </section>
+<?php endif; ?>
+
 
 <?php get_footer(); ?>
 

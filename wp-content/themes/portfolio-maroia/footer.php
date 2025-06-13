@@ -11,25 +11,30 @@
 
         <div class="footer-column">
             <h3>Navigation</h3>
-            <ul>
-                <li><a href="#landing">Accueil</a></li>
-                <li><a href="#aboutMe">About me</a></li>
-                <li><a href="#projects">Projets</a></li>
-                <li><a href="#history">Mon histoire</a></li>
-                <li><a href="#contactMe">Contact</a></li>
-            </ul>
+            <?php
+            wp_nav_menu([
+                'theme_location' => 'footer',
+                'menu_class'     => 'footer-menu',
+                'container'      => false,
+                'fallback_cb'    => false,
+            ]);
+            ?>
         </div>
 
         <div class="footer-column">
             <h3>Social</h3>
             <ul>
-                <li><a href="#">Github</a></li>
-                <li><a href="#">Linkedin</a></li>
+                <li><a href="https://github.com/Haddaji-Maroia" target="_blank" rel="noopener">Github</a></li>
+                <li><a href="https://linkedin.com/" target="_blank" rel="noopener">LinkedIn</a></li>
             </ul>
         </div>
     </nav>
 
     <div class="footer-bottom">
-        <p>&copy; 2025 Maroia Haddaji. Tous droits réservés.</p>
+        <p>&copy; <?php echo date('Y'); ?> Maroia Haddaji. Tous droits réservés.</p>
     </div>
+
+    <?php wp_footer(); ?>
 </footer>
+</body>
+</html>

@@ -82,7 +82,7 @@ get_header();
                                     <div class="project-cover">
                                         <figure>
                                             <?php if (has_post_thumbnail()) : ?>
-                                                <?php the_post_thumbnail('full'); ?>
+                                                <?php the_post_thumbnail('medium'); ?>
                                             <?php endif; ?>
                                             <span><?= esc_html(get_the_title()); ?></span>
                                         </figure>
@@ -205,36 +205,57 @@ get_header();
                 </div>
                 <div class="form-section">
                     <section class="form-container">
-                        <div class="form">
-                            <form action="" method="post">
-                                <h2>Formulaire de contact</h2>
-                                <div class="form-input-container">
-                                    <div class="form-input-wrapper">
-                                        <label for="familyname">Nom</label>
-                                        <input type="text" id="familyname" name="familyname" placeholder="Ex. Mark">
+
+                            <div class="form">
+                                <?php session_start(); ?>
+
+                                <?php if (!empty($_SESSION['contact_form_errors'])): ?>
+                                    <div class="form-errors">
+                                        <?php foreach ($_SESSION['contact_form_errors'] as $error): ?>
+                                            <p><?= esc_html($error); ?></p>
+                                        <?php endforeach; ?>
+                                        <?php unset($_SESSION['contact_form_errors']); ?>
                                     </div>
-                                    <div class="form-input-wrapper">
-                                        <label for="name">Prénom</label>
-                                        <input type="text" id="name" name="name" placeholder="Ex. Smith">
+                                <?php endif; ?>
+
+                                <?php if (!empty($_SESSION['contact_form_success'])): ?>
+                                    <div class="form-success">
+                                        <p><?= esc_html($_SESSION['contact_form_success']); ?></p>
+                                        <?php unset($_SESSION['contact_form_success']); ?>
                                     </div>
-                                    <div class="form-input-wrapper">
-                                        <label for="email">Email</label>
-                                        <input type="email" id="email" name="email"
-                                               placeholder="Ex. marksmith@gmail.com">
+                                <?php endif; ?>
+
+                                <form action="<?= get_template_directory_uri(); ?>/form/form-handler.php" method="post">
+                                <input type="hidden" name="action" value="handle_contact_form">
+                                    <h2>Formulaire de contact</h2>
+                                    <div class="form-input-container">
+                                        <div class="form-input-wrapper">
+                                            <label for="familyname">Nom</label>
+                                            <input type="text" id="familyname" name="familyname" placeholder="Ex. Mark">
+                                        </div>
+                                        <div class="form-input-wrapper">
+                                            <label for="name">Prénom</label>
+                                            <input type="text" id="name" name="name" placeholder="Ex. Smith">
+                                        </div>
+                                        <div class="form-input-wrapper">
+                                            <label for="email">Email</label>
+                                            <input type="email" id="email" name="email"
+                                                   placeholder="Ex. marksmith@gmail.com">
+                                        </div>
+                                        <div class="form-input-wrapper">
+                                            <label for="object">Sujet</label>
+                                            <input type="text" id="object" name="object" placeholder="Ex. Votre sujet">
+                                        </div>
+                                        <div class="form-input-wrapper">
+                                            <label for="message">Message</label>
+                                            <textarea name="message" id="message" cols="30" rows="10"
+                                                      placeholder="Ex. Écrivez votre message ici"></textarea>
+                                        </div>
                                     </div>
-                                    <div class="form-input-wrapper">
-                                        <label for="object">Sujet</label>
-                                        <input type="text" id="object" name="object" placeholder="Ex. Votre sujet">
-                                    </div>
-                                    <div class="form-input-wrapper">
-                                        <label for="message">Message</label>
-                                        <textarea name="message" id="message" cols="30" rows="10"
-                                                  placeholder="Ex. Écrivez votre message ici"></textarea>
-                                    </div>
-                                </div>
-                                <button class="btn-form" type="submit">Contactez-moi !</button>
-                            </form>
-                        </div>
+                                    <button class="btn-form" type="submit">Contactez-moi !</button>
+                                </form>
+                            </div>
+
                     </section>
                 </div>
             </div>

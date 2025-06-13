@@ -1,4 +1,9 @@
 <?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
 // Disable Gutenberg on the back end.
 add_filter('use_block_editor_for_post', '__return_false');
 // Disable Gutenberg for widgets.
@@ -42,17 +47,16 @@ function portfoliomaroia_theme_support(){
 add_action( 'after_setup_theme', 'portfoliomaroia_theme_support' );
 
 
-function portfoliomaroia_menus(){
 
-    $locations = array(
-        'primary'=> 'Desktop main menu',
-        'footer'=> 'Footer main menu',
-    );
+// MENUS
 
-    register_nav_menus( $locations );
+function theme_register_menus() {
+    register_nav_menus([
+        'primary' => 'Menu principal',
+        'footer'  => 'Menu footer',
+    ]);
 }
-
-add_action('init', 'portfoliomaroia_menus');
+add_action('init', 'theme_register_menus');
 
 
 function portfolio_maroia_register_styles() {
@@ -113,6 +117,80 @@ function register_project_taxonomy() {
     );
 }
 add_action('init', 'register_project_taxonomy');
+
+
+// CONTACT FORM
+
+function dw_register_contact_message_post_type() {
+    register_post_type('contact_message', [
+        'label' => 'Messages de contact',
+        'public' => false,
+        'show_ui' => true,
+        'supports' => ['title', 'editor'],
+        'menu_icon' => 'dashicons-email',
+    ]);
+}
+add_action('init', 'dw_register_contact_message_post_type');
+
+
+add_action('admin_post_nopriv_handle_contact_form', 'handle_contact_form');
+add_action('admin_post_handle_contact_form', 'handle_contact_form');
+
+function handle_contact_form() {
+    session_start();
+
+    $errors = [];
+
+    // Validazione base
+    if (empty($_POST['familyname'])) $errors['familyname'] = 'Le nom est requis.';
+    if (empty($_POST['name'])) $errors['name'] = 'Le prénom est requis.';
+    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) $errors['email'] = 'Adresse email invalide.';
+    if (empty($_POST['message'])) $errors['message'] = 'Le message est requis.';
+
+    if (!empty($errors)) {
+        $_SESSION['contact_form_errors'] = $errors;
+        wp_safe_redirect(wp_get_referer());
+        exit;
+    }
+
+    // Invia email
+    $message = sanitize_textarea_field($_POST['message']);
+    $subject = sanitize_text_field($_POST['object']);
+    $from = sanitize_email($_POST['email']);
+    $name = sanitize_text_field($_POST['name'] . ' ' . $_POST['familyname']);
+
+    wp_mail(
+        'tuo@email.com',
+        "Contact: $subject",
+        "Message de $name\n\n$message\n\nEmail: $from",
+        ['Reply-To: '.$from]
+    );
+
+    $_SESSION['contact_form_success'] = 'Merci! Votre message a été envoyé.';
+    wp_safe_redirect(wp_get_referer());
+    exit;
+}
+
+add_action('init', function () {
+    add_rewrite_rule('^form-handler/?$', 'index.php?form_handler=1', 'top');
+    add_rewrite_tag('%form_handler%', '1');
+});
+
+add_action('template_redirect', function () {
+    if (get_query_var('form_handler') == 1) {
+        include get_template_directory() . '/form/form-handler.php';
+        exit;
+    }
+});
+
+// ADD CLASS NAV_LINK FOR HOVER
+function add_nav_link_class($classes, $item, $args) {
+    if ($args->theme_location === 'primary') {
+        $classes[] = 'nav-link';
+    }
+    return $classes;
+}
+add_filter('nav_menu_css_class', 'add_nav_link_class', 10, 3);
 
 
 
