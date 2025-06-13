@@ -97,6 +97,25 @@ function register_custom_post_type_projets() {
 add_action('init', 'register_custom_post_type_projets');
 
 
+//taxonomie pour type de projet
+
+function register_project_taxonomy() {
+    register_taxonomy(
+        'type_projet', // slug della tassonomia
+        'projets',     // post type a cui è associata
+        [
+            'label' => 'Type de projet',
+            'public' => true,
+            'hierarchical' => false, // tipo tag (true se vuoi tipo categorie)
+            'show_in_rest' => true,
+            'rewrite' => ['slug' => 'type'],
+        ]
+    );
+}
+add_action('init', 'register_project_taxonomy');
+
+
+
 
 
 

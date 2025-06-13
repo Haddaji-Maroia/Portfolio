@@ -36,8 +36,8 @@ get_header();
                 <div class="circle-container">
                     <img class="circle" src="<?php echo get_template_directory_uri(); ?>/assets/images/circle.svg"
                          alt="simple blue circle for background">
-                    <img class="avatar" src="<?php echo get_template_directory_uri(); ?>/assets/images/avatar.png"
-                         alt="my own illustration">
+                    <img class="avatar" src="<?php echo get_template_directory_uri(); ?>/assets/images/dragon-avatar.png"
+                         alt="dragon avatar illustration">
                 </div>
             </div>
             <img class="lantern__chinese" src="<?php echo get_template_directory_uri(); ?>/assets/images/lantern.svg"

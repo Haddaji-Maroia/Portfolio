@@ -46,12 +46,12 @@
 
 
             <ul class="menu">
-                <li><a href="<?php echo home_url(); ?>/#landing">Accueil</a></li>
-                <li><a href="<?php echo home_url(); ?>/#aboutMe">About me</a></li>
-                <li><a href="<?php echo get_permalink( get_page_by_path('mes-projets') ); ?>">Projets</a></li>
-                <li><a href="<?php echo home_url(); ?>/#history">Mon histoire</a></li>
-                <li><a href="<?php echo home_url(); ?>/#contactMe">Contact</a></li>
-                <li><a href="">EN</a></li>
+                <li><a href="<?php echo home_url(); ?>/#landing" class="nav-link">Accueil</a></li>
+                <li><a href="<?php echo home_url(); ?>/#aboutMe" class="nav-link">About me</a></li>
+                <li><a href="<?php echo get_permalink( get_page_by_path('mes-projets') ); ?>" class="nav-link">Projets</a></li>
+                <li><a href="<?php echo home_url(); ?>/#history" class="nav-link">Mon histoire</a></li>
+                <li><a href="<?php echo home_url(); ?>/#contactMe" class="nav-link">Contact</a></li>
+                <li><a href="" class="nav-link">EN</a></li>
             </ul>
         </div>
     </nav>

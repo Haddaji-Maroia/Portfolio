@@ -26,6 +26,7 @@
         margin-bottom: 20px;
         line-height: 1.6;
         margin-right: 30px;
+        max-width: 500px;
       }
     }
 
@@ -41,6 +42,7 @@
 
   .circle {
     @media (max-width: 900px) {
+      width: 100%;
       margin-top: 30px;
     }
   }
@@ -70,42 +72,38 @@
   /* decorations illustration */
   .illustration {
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-
-    .circle-container {
-      position: relative;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      overflow: hidden;
-
-      @media (max-width: 900px) {
-        width: 150px;
-        height: 150px;
-      }
-    }
-
-    .circle {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .avatar {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 100%;
-      height: auto;
-    }
-
+    width: 300px; /* o la dimensione che vuoi */
+    height: 300px;
   }
+
+  .circle-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .circle {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    z-index: 1;
+    position: relative;
+  }
+
+  .avatar {
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 450px;
+    z-index: 2;
+    filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.25));
+    transition: transform 0.3s ease;
+  }
+
   .lantern__chinese{
-    width: 150px;
+    width: 130px;
     position: absolute;
     top: -50px;
     right: -10px;
@@ -114,6 +112,7 @@
 
     @media (max-width: 900px) {
       width: 90px;
+
     }
   }
 
