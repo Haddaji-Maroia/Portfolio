@@ -1,20 +1,16 @@
-<?php   ?>
+<?php get_header(); ?>
 
-
-<?= get_header(); ?>
-
-<div class="error-404-container">
+<div class="error-404-container" role="main">
     <h1>404</h1>
-    <h2>Oups ! Page introuvable</h2>
+    <h2>Oups&nbsp;! Page introuvable</h2>
     <p>
         Désolé, la page que vous recherchez n'existe pas ou a été déplacée.
     </p>
 
-    <!-- Bottone per tornare alla Home -->
-    <a href="<?php echo esc_url(home_url('/')); ?>" class="home-button">
+    <!-- Bouton pour retourner à l'accueil -->
+    <a href="<?php echo esc_url(home_url('/')); ?>" class="home-button" aria-label="Retour à la page d’accueil">
         Retour à l'accueil
     </a>
-
 </div>
 
-<?= get_footer(); ?>
+<?php get_footer(); ?>

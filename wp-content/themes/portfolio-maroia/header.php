@@ -10,7 +10,7 @@
 </head>
 <body <?php body_class(); ?>>
 <header>
-    <nav class="main-navigation" role="navigation">
+    <nav class="main-navigation" role="navigation" aria-label="Navigation principale">
 
         <?php
         if (function_exists('the_custom_logo')) {
@@ -25,10 +25,10 @@
         ?>
 
         <!-- Checkbox toggle -->
-        <input type="checkbox" id="menu-toggle" class="menu-toggle" />
+        <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-hidden="true" />
 
         <!-- Burger menu -->
-        <label for="menu-toggle" class="navbar__toggle" aria-label="Toggle menu">
+        <label for="menu-toggle" class="navbar__toggle" aria-label="Ouvrir ou fermer le menu principal">
             <span class="bar bar1"></span>
             <span class="bar bar2"></span>
             <span class="bar bar3"></span>
@@ -36,7 +36,7 @@
 
         <!-- Contenuto visibile della pagina -->
         <div class="page-content">
-            <div class="container">
+            <div class="container" role="menubar">
                 <?php
                 wp_nav_menu([
                     'theme_location' => 'primary',
@@ -56,8 +56,8 @@
                     ]);
                     ?>
                     <?php if (!empty($languages)) : ?>
-                        <div class="language-switcher">
-                            <button class="current-lang-btn" aria-haspopup="true" aria-expanded="false">
+                        <div class="language-switcher" role="navigation" aria-label="Sélecteur de langue">
+                            <button class="current-lang-btn" aria-haspopup="true" aria-expanded="false" aria-label="Langue actuelle">
                                 <?php
                                 foreach ($languages as $lang) {
                                     if ($lang['current_lang']) {
@@ -68,11 +68,11 @@
                                 ?>
                                 ⌄
                             </button>
-                            <ul class="lang-dropdown">
+                            <ul class="lang-dropdown" role="menu">
                                 <?php foreach ($languages as $lang) : ?>
                                     <?php if (!$lang['current_lang']) : ?>
-                                        <li>
-                                            <a href="<?= esc_url($lang['url']); ?>">
+                                        <li role="none">
+                                            <a role="menuitem" href="<?= esc_url($lang['url']); ?>">
                                                 <?= esc_html($lang['name']); ?>
                                             </a>
                                         </li>
@@ -98,7 +98,7 @@
 
             <?php if (function_exists('pll_the_languages')) : ?>
                 <?php if (!empty($languages)) : ?>
-                    <div class="offcanvas-language-switcher">
+                    <div class="offcanvas-language-switcher" role="navigation" aria-label="Sélecteur de langue mobile">
                         <ul>
                             <?php foreach ($languages as $lang) : ?>
                                 <li>
