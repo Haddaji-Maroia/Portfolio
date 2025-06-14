@@ -1,7 +1,12 @@
 @import "../settings/fonts";
 
 .contact-me {
-  background: linear-gradient(#97d7f2, #ffff, #428bbc);
+  background-image:
+          url("/wp-content/themes/portfolio-maroia/assets/images/rock3.svg"),
+          linear-gradient(#97d7f2, #ffff, #428bbc);
+  background-repeat: no-repeat;
+  background-position: center bottom, center center;
+  background-size: contain;
   padding: 20px 120px 100px;
 
   h2 {

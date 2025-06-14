@@ -19,9 +19,6 @@ get_header();
                      alt="Petit nuage style chinois">
             </div>
         </div>
-        <div class="tree-canvas">
-            <canvas id="treeCanvas" width="600" height="600" aria-label="Animation arbre" role="img"></canvas>
-        </div>
     </section>
 
     <section id="aboutMe" class="about-me" role="region" aria-labelledby="about-title" itemprop="description">

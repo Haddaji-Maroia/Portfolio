@@ -33,12 +33,22 @@ p {
 
 .landing {
   background-color: #C4E5FC;
-  height: 800px;
-  background-image: url("/wp-content/themes/portfolio-maroia/assets/images/background-hero.svg");
+  height: 700px;
+  background-image: url("/wp-content/themes/portfolio-maroia/assets/images/hero-background.svg");
   background-position: left bottom -30px;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
+  position: relative;
 
+  h1{
+    line-height: 1;
+  }
+
+  // Mobile: usa cover per riempire
+  @media (max-width: 768px) {
+    background-size: contain;
+    background-position: center bottom; // opzionale, centrato per mobile
+  }
 }
 
 .title {
@@ -62,18 +72,46 @@ p {
 }
 
 .tree-canvas {
+  position: relative;
+}
+
+.tree-flower {
   position: absolute;
-  top: 100px;
-  left: 0;
+  top: 120px;
+  left: -60px;
   height: 100%;
   z-index: 2;
 
-  #treeCanvas {
-    width: 100%;
-    height: auto;
-    background: transparent;
+  img {
+    height: 100%;
+    width: auto;
+    display: block;
   }
 }
+
+/* Tablet */
+@media (max-width: 992px) {
+  .tree-flower {
+    top: 130px;
+    left: -60px;
+    width: 350px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .tree-flower {
+    top: 220px;
+    left: -40px;
+    width: 50%;
+  }
+}
+
+
+
+
+
+
 
 /* Clouds animation */
 .clouds {
@@ -89,6 +127,12 @@ p {
     &.cloud-left {
       top: 62px;
       left: 283px;
+
+      @media (max-width: 768px) {
+        width: 20%;
+        top: 62px;
+        left: calc(50% - 160px);
+      }
     }
 
     &.cloud-right {
@@ -110,3 +154,4 @@ p {
     transform: translateX(20px);
   }
 }
+

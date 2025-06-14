@@ -75,11 +75,21 @@ p {
 /* HERO SECTION */
 .landing {
   background-color: #C4E5FC;
-  height: 800px;
-  background-image: url("/wp-content/themes/portfolio-maroia/assets/images/background-hero.svg");
+  height: 700px;
+  background-image: url("/wp-content/themes/portfolio-maroia/assets/images/hero-background.svg");
   background-position: left bottom -30px;
-  background-size: contain;
+  background-size: cover;
   background-repeat: no-repeat;
+  position: relative;
+}
+.landing h1 {
+  line-height: 1;
+}
+@media (max-width: 768px) {
+  .landing {
+    background-size: contain;
+    background-position: center bottom;
+  }
 }
 
 .title {
@@ -103,18 +113,38 @@ p {
 }
 
 .tree-canvas {
+  position: relative;
+}
+
+.tree-flower {
   position: absolute;
-  top: 100px;
-  left: 0;
+  top: 120px;
+  left: -60px;
   height: 100%;
   z-index: 2;
 }
-.tree-canvas #treeCanvas {
-  width: 100%;
-  height: auto;
-  background: transparent;
+.tree-flower img {
+  height: 100%;
+  width: auto;
+  display: block;
 }
 
+/* Tablet */
+@media (max-width: 992px) {
+  .tree-flower {
+    top: 130px;
+    left: -60px;
+    width: 350px;
+  }
+}
+/* Mobile */
+@media (max-width: 600px) {
+  .tree-flower {
+    top: 220px;
+    left: -40px;
+    width: 50%;
+  }
+}
 /* Clouds animation */
 .clouds {
   position: relative;
@@ -129,6 +159,13 @@ p {
 .clouds .cloud.cloud-left {
   top: 62px;
   left: 283px;
+}
+@media (max-width: 768px) {
+  .clouds .cloud.cloud-left {
+    width: 20%;
+    top: 62px;
+    left: calc(50% - 160px);
+  }
 }
 .clouds .cloud.cloud-right {
   top: 23px;
@@ -788,7 +825,10 @@ p {
   font-display: swap;
 }
 .contact-me {
-  background: linear-gradient(#97d7f2, white, #428bbc);
+  background-image: url("/wp-content/themes/portfolio-maroia/assets/images/rock3.svg"), linear-gradient(#97d7f2, white, #428bbc);
+  background-repeat: no-repeat;
+  background-position: center bottom, center center;
+  background-size: contain;
   padding: 20px 120px 100px;
 }
 .contact-me h2 {
@@ -1523,7 +1563,7 @@ footer .footer-bottom {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 8rem;
+  gap: 4rem;
   margin-bottom: 40px;
 }
 .single-project .image_cover {
@@ -1553,11 +1593,13 @@ footer .footer-bottom {
   margin-bottom: 2rem;
 }
 .single-project .bloc_technologies {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: max-content;
+  display: flex;
+  flex-wrap: wrap;
   gap: 1rem;
-  justify-content: start;
+  justify-content: flex-start;
+}
+.single-project .bloc_technologies .tech-badge {
+  flex: 0 0 auto;
 }
 .single-project a {
   display: inline-block;
@@ -1609,14 +1651,39 @@ footer .footer-bottom {
 
 @media (max-width: 768px) {
   .single-project {
-    padding: 4rem 2rem;
+    padding: 2rem 1rem;
   }
   .single-project .project_presentation {
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  .single-project .project_presentation .image_cover figure img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  .single-project .project_presentation .text_projet {
+    width: 100%;
+  }
+  .single-project .project_presentation .text_projet a {
+    margin-bottom: 1.5rem;
+    display: inline-block;
+    font-size: 1rem;
+  }
+  .single-project .project_presentation .text_projet p {
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  .single-project .project_presentation .text_projet .bloc_technologies {
+    justify-content: center;
   }
   .single-project .explaination {
     flex-direction: column;
+    gap: 1.5rem;
+  }
+  .single-project .explaination .cardproject {
+    padding: 2rem 1rem;
   }
 }
 .project-gallery {

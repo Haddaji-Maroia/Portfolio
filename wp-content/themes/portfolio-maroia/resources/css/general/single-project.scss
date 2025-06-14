@@ -25,7 +25,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 8rem;
+    gap: 4rem;
     margin-bottom: 40px;
 
   }
@@ -61,11 +61,14 @@
   }
 
   .bloc_technologies {
-    display: grid;
-    grid-auto-flow: column;
-    grid-auto-columns: max-content;
+    display: flex;
+    flex-wrap: wrap;
     gap: 1rem;
-    justify-content: start;
+    justify-content: flex-start;
+
+    .tech-badge {
+      flex: 0 0 auto; // non si allarga troppo
+    }
   }
 
 
@@ -106,6 +109,7 @@
         color: #9c64bb;
         background: none;
       }
+
     }
   }
 
@@ -132,18 +136,47 @@
 // Responsive (optional)
 @media (max-width: 768px) {
   .single-project {
-    padding: 4rem 2rem;
+    padding: 2rem 1rem;
 
     .project_presentation {
       flex-direction: column;
-      gap: 2rem;
+      gap: 1.5rem;
+      align-items: center;  // centra contenuti
+
+      .image_cover figure img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+      }
+
+      .text_projet {
+        width: 100%;
+        a {
+          margin-bottom: 1.5rem;
+          display: inline-block;
+          font-size: 1rem;
+        }
+        p {
+          font-size: 1rem;
+          line-height: 1.4;
+        }
+        .bloc_technologies {
+          justify-content: center; // centrare le badge su schermi piccoli
+        }
+      }
     }
 
     .explaination {
       flex-direction: column;
+      gap: 1.5rem;
+
+      .cardproject {
+        padding: 2rem 1rem;
+      }
     }
   }
 }
+
 
 
 // GALLERY IMAGES PROJECTS

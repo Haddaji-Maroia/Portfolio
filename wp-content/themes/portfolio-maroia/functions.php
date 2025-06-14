@@ -32,6 +32,7 @@ function portfolio_enqueue_assets() {
             null,
             true
         );
+
     }
 }
 add_action('wp_enqueue_scripts', 'portfolio_enqueue_assets');
