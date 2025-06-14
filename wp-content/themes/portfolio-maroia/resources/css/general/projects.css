@@ -1,3 +1,184 @@
+:root {
+  --font-base: "Lora", Georgia, Times New Roman, serif;
+  --font-title: "Playfair Display", Times New Roman, serif;
+}
 
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/PlayfairDisplay-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/PlayfairDisplay-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/PlayfairDisplay-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lora";
+  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/Lora-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lora";
+  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/Lora-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lora";
+  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/Lora-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+.projects-section {
+  min-height: 800px;
+  background: linear-gradient(#C4E5FC, #C4E5FC, #75A1BF);
+}
+.projects-section .hidden {
+  visibility: hidden;
+}
+.projects-section .projects {
+  padding: 100px 120px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.projects-section .projects h2 {
+  font-family: var(--font-title), serif;
+  margin-bottom: 50px;
+}
+@media (max-width: 700px) {
+  .projects-section .projects {
+    padding: 50px 80px;
+  }
+}
+.projects-section .projects .filter-buttons {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 40px 0;
+}
+.projects-section .projects .filter-buttons button {
+  padding: 10px 20px;
+  background-color: white;
+  color: #1e6b9d;
+  border: 2px solid #1e6b9d;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  min-width: 140px;
+}
+.projects-section .projects .filter-buttons button:hover, .projects-section .projects .filter-buttons button.active {
+  background-color: #438BBC;
+  color: white;
+  border-color: #438BBC;
+}
+.projects-section .projects .project-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 50px 0;
+  gap: 40px;
+}
+.projects-section .projects .project-container .project .floating {
+  animation: float-up-down 4s ease-in-out infinite alternate-reverse both;
+}
+.projects-section .projects .project-container .project .floating .project-card {
+  width: 248px;
+  height: 310px;
+  background-color: #1e6b9d;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease;
+  text-decoration: none;
+  color: inherit;
+}
+.projects-section .projects .project-container .project .floating .project-card:hover {
+  transform: scale(1.1);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+  opacity: 1;
+}
+.projects-section .projects .project-container .project .floating .project-card:hover img {
+  transform: scale(1.05);
+}
+.projects-section .projects .project-container .project .floating .project-card .project-cover figure {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+.projects-section .projects .project-container .project .floating .project-card .project-cover figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.5s ease;
+}
+.projects-section .projects .project-container .project .floating .project-card .project-cover figure span {
+  font-family: var(--font-title), serif;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #1e6b9d;
+  position: absolute;
+  bottom: 65px;
+  left: 50%;
+  width: 100%;
+  text-align: center;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 10px 16px;
+  border-radius: 8px;
+  transition: opacity 0.3s ease;
+}
+.projects-section .projects .btn-projects {
+  display: inline-block;
+  padding: 12px 50px;
+  background-color: #2577a4;
+  color: white;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 400;
+  transition: background-color 0.3s ease;
+}
+.projects-section .projects .btn-projects:hover {
+  background-color: #155b82;
+}
+.projects-section .projects .button-wrapper {
+  text-align: center;
+}
+
+@keyframes float-up-down {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
 
 /*# sourceMappingURL=projects.css.map */

@@ -1,5 +1,52 @@
+:root {
+  --font-base: "Lora", Georgia, Times New Roman, serif;
+  --font-title: "Playfair Display", Times New Roman, serif;
+}
+
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/PlayfairDisplay-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/PlayfairDisplay-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/PlayfairDisplay-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lora";
+  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/Lora-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lora";
+  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/Lora-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Lora";
+  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/Lora-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 .history-section {
-  background-image: url("./assets/images/mountains-back2.svg");
+  background-image: url("/wp-content/themes/portfolio-maroia/assets/images/mountains-back2.svg");
   background-position: left bottom -30px;
   background-size: contain;
   background-repeat: no-repeat;
@@ -13,7 +60,7 @@
   width: 60px;
   position: absolute;
   top: -1px;
-  right: 130px;
+  right: 50px;
 }
 .history-section .history img.furin.furin-top {
   animation: swing 3s ease-in-out infinite;
@@ -22,10 +69,14 @@
 .history-section .history img.furin.furin-bottom {
   width: 20px;
   top: 48px;
-  right: 150px;
+  right: 75px;
   animation: swing 2s ease-in-out infinite;
   transform-origin: top center;
   z-index: -1;
+}
+.history-section .history h2 {
+  font-family: var(--font-title), serif;
+  font-weight: bold;
 }
 .history-section .history .timeline {
   display: flex;
@@ -39,16 +90,16 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  max-width: 120px;
+  max-width: 150px;
   position: relative;
 }
 .history-section .history .timeline .experience img {
   width: 180px;
 }
 .history-section .history .timeline .experience .year {
+  font-family: var(--font-base), serif;
   margin-bottom: 10px;
   color: #1e6b9d;
-  font-weight: 400;
   font-size: 14px;
   line-height: 1.4;
   position: absolute;
@@ -57,9 +108,10 @@
   transform: translate(-50%, -50%);
 }
 .history-section .history .timeline .experience .date {
+  font-family: var(--font-title), serif;
+  font-weight: bold;
   color: #8b6e28;
   font-size: 18px;
-  font-weight: 500;
 }
 .history-section .history .timeline .experience .small {
   font-size: 14px;
