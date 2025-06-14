@@ -1,5 +1,3 @@
-@import "../settings/fonts";
-
 .technologies-section {
   min-height: 800px;
   background: linear-gradient(#dae7f7, #fff, #97d7f2);
@@ -14,10 +12,11 @@
       margin-bottom: 100px;
     }
 
-    .text-wrapper{
-      font-family: var(--font-base) ,serif;
+    .text-wrapper {
+      font-family: var(--font-base), serif;
     }
-    .tech__title{
+
+    .tech__title {
       font-weight: bold;
     }
 
@@ -61,37 +60,30 @@
     .clouds2 {
       animation: oscillate 2s ease-in-out infinite alternate;
     }
-  }
-}
 
-@media (max-width: 780px) {
-  .technogies {
-    padding: 50px 20px;
+    // 📱 MOBILE
+    @media (max-width: 780px) {
+      padding: 50px;
 
-    .box-tech {
-      grid-template-columns: 1fr !important;  // FORZA 1 COLONNA
-      gap: 30px;
-      padding: 0 10px;
+      .box-tech {
+        grid-template-columns: 1fr !important;
+        gap: 30px;
+        padding: 0 10px;
+      }
+
+      .tech {
+        justify-content: flex-start;
+      }
     }
 
-    .tech {
-      justify-content: flex-start;  // Allinea icona e testo a sinistra
+    @media (max-width: 480px) {
+      .technogies{
+        padding: 100px 50px;
+      }
+      .box-tech {
+        grid-template-columns: 1fr;
+        padding: 50px;
+      }
     }
-  }
-}
-
-@media (max-width: 480px) {
-  .box-tech {
-    grid-template-columns: 1fr;
-    padding: 0 10px;
-  }
-}
-
-@keyframes oscillate {
-  0% {
-    transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(20px);
   }
 }

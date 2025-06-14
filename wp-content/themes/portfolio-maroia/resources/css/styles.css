@@ -229,6 +229,7 @@ p {
 @media (max-width: 600px) {
   .about-me .presentation {
     flex-direction: column-reverse;
+    padding: 50px 20px;
   }
 }
 @media (max-width: 900px) {
@@ -258,7 +259,7 @@ p {
 }
 .about-me .illustration {
   position: relative;
-  width: 300px; /* o la dimensione che vuoi */
+  width: 300px;
   height: 300px;
 }
 .about-me .circle-container {
@@ -285,16 +286,26 @@ p {
   transition: transform 0.3s ease;
 }
 .about-me .lantern__chinese {
-  width: 130px;
   position: absolute;
+  width: 130px;
   top: -50px;
   right: -10px;
+  z-index: 3;
   animation: swing 3s ease-in-out infinite;
   transform-origin: top center;
 }
 @media (max-width: 900px) {
   .about-me .lantern__chinese {
     width: 90px;
+    top: -50px;
+    right: -10px;
+  }
+}
+@media (max-width: 600px) {
+  .about-me .lantern__chinese {
+    width: 90px;
+    top: -50px;
+    right: -10px;
   }
 }
 
@@ -359,6 +370,9 @@ p {
 .projects-section {
   min-height: 800px;
   background: linear-gradient(#C4E5FC, #C4E5FC, #75A1BF);
+}
+.projects-section .hidden {
+  visibility: hidden;
 }
 .projects-section .projects {
   padding: 100px 120px;
@@ -550,7 +564,7 @@ p {
   width: 60px;
   position: absolute;
   top: -1px;
-  right: 130px;
+  right: 50px;
 }
 .history-section .history img.furin.furin-top {
   animation: swing 3s ease-in-out infinite;
@@ -559,7 +573,7 @@ p {
 .history-section .history img.furin.furin-bottom {
   width: 20px;
   top: 48px;
-  right: 150px;
+  right: 75px;
   animation: swing 2s ease-in-out infinite;
   transform-origin: top center;
   z-index: -1;
@@ -649,53 +663,6 @@ p {
     transform: rotate(5deg);
   }
 }
-:root {
-  --font-base: "Lora", Georgia, Times New Roman, serif;
-  --font-title: "Playfair Display", Times New Roman, serif;
-}
-
-@font-face {
-  font-family: "Playfair Display";
-  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/PlayfairDisplay-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Playfair Display";
-  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/PlayfairDisplay-Italic.ttf") format("truetype");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Playfair Display";
-  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/PlayfairDisplay-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Lora";
-  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/Lora-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Lora";
-  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/Lora-Italic.ttf") format("truetype");
-  font-weight: 400;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Lora";
-  src: url("/wp-content/themes/portfolio-maroia/resources/fonts/Lora-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
 .technologies-section {
   min-height: 800px;
   background: linear-gradient(#dae7f7, #fff, #97d7f2);
@@ -750,34 +717,29 @@ p {
 .technologies-section .technogies .clouds2 {
   animation: oscillate 2s ease-in-out infinite alternate;
 }
-
 @media (max-width: 780px) {
-  .technogies {
-    padding: 50px 20px;
+  .technologies-section .technogies {
+    padding: 50px;
   }
-  .technogies .box-tech {
+  .technologies-section .technogies .box-tech {
     grid-template-columns: 1fr !important;
     gap: 30px;
     padding: 0 10px;
   }
-  .technogies .tech {
+  .technologies-section .technogies .tech {
     justify-content: flex-start;
   }
 }
 @media (max-width: 480px) {
-  .box-tech {
+  .technologies-section .technogies .technogies {
+    padding: 100px 50px;
+  }
+  .technologies-section .technogies .box-tech {
     grid-template-columns: 1fr;
-    padding: 0 10px;
+    padding: 50px;
   }
 }
-@keyframes oscillate {
-  0% {
-    transform: translateX(0px);
-  }
-  100% {
-    transform: translateX(20px);
-  }
-}
+
 :root {
   --font-base: "Lora", Georgia, Times New Roman, serif;
   --font-title: "Playfair Display", Times New Roman, serif;
@@ -926,7 +888,7 @@ p {
     right: -2px;
   }
   .contact-me .text-wrapper {
-    margin-bottom: 100px;
+    margin-bottom: 30px;
   }
 }
 
@@ -1139,12 +1101,12 @@ header {
 .navbar__toggle {
   display: none;
   position: fixed;
-  top: 25px;
-  right: 25px;
+  top: 20px;
+  right: 20px;
   width: 30px;
   height: 22px;
   cursor: pointer;
-  z-index: 2001;
+  z-index: 3000;
   -webkit-tap-highlight-color: transparent;
 }
 

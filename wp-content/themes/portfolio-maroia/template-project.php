@@ -3,6 +3,9 @@
 
 <section id="projects" class="projects-section">
     <div class="projects container">
+        <h1 class="hidden">
+            Projects page
+        </h1>
 
         <h2>
             <?php $title = get_field('title'); ?>

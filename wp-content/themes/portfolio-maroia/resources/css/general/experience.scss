@@ -15,7 +15,7 @@
       width: 60px;
       position: absolute;
       top: -1px;
-      right: 130px;
+      right: 50px;
 
       &.furin-top {
         animation: swing 3s ease-in-out infinite;
@@ -25,7 +25,7 @@
       &.furin-bottom {
         width: 20px;
         top: 48px;
-        right: 150px;
+        right: 75px;
         animation: swing 2s ease-in-out infinite;
         transform-origin: top center;
         z-index: -1;

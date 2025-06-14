@@ -3,12 +3,12 @@ get_header();
 ?>
 
 <main>
-    <section id="landing" class="landing" role="region" aria-label="Section d’accueil">
+    <section id="landing" class="landing" role="region" aria-label="Section d’accueil" itemscope itemtype="https://schema.org/Person">
         <div class="content">
-            <h1 class="title">
+            <h1 class="title" itemprop="name">
                 <?php $title = get_field('title') ?>
                 <?= $title !== '' ? $title : '' ?><br>
-                <span class="subtitle">Web developer & designer</span>
+                <span class="subtitle" itemprop="jobTitle">Web developer & designer</span>
             </h1>
             <div class="clouds">
                 <img class="cloud cloud-left oscillate"
@@ -24,11 +24,11 @@ get_header();
         </div>
     </section>
 
-    <section id="aboutMe" class="about-me" role="region" aria-labelledby="about-title">
+    <section id="aboutMe" class="about-me" role="region" aria-labelledby="about-title" itemprop="description">
         <div class="presentation">
             <div class="text-about">
                 <?php $about_title = get_field('about_title') ?>
-                <h2 id="about-title"><?= $about_title !== '' ? $about_title : '' ?></h2>
+                <h2 id="about-title" itemprop="description"><?= $about_title !== '' ? $about_title : '' ?></h2>
                 <?php $about_text = get_field('about_text') ?>
                 <?= $about_text !== '' ? $about_text : '' ?>
             </div>
@@ -51,7 +51,7 @@ get_header();
         </div>
     </section>
 
-    <section id="projects" class="projects-section" role="region" aria-labelledby="projects-title">
+    <section id="projects" class="projects-section" role="region" aria-labelledby="projects-title" itemscope itemtype="https://schema.org/CreativeWork">
         <div class="projects">
             <?php $project_title = get_field('project_title') ?>
             <h2 id="projects-title"><?= $project_title !== '' ? $project_title : '' ?></h2>
@@ -73,13 +73,13 @@ get_header();
                         ?>
                         <article class="project">
                             <div class="floating">
-                                <a class="project-card" href="<?= esc_url($project_link); ?>" aria-label="Voir le projet : <?= esc_attr(get_the_title()); ?>">
+                                <a class="project-card" href="<?= esc_url($project_link); ?>" aria-label="Voir le projet : <?= esc_attr(get_the_title()); ?>" itemprop="url">
                                     <div class="project-cover">
                                         <figure>
                                             <?php if (has_post_thumbnail()) : ?>
                                                 <?php the_post_thumbnail('medium', ['alt' => get_the_title()]); ?>
                                             <?php endif; ?>
-                                            <span><?= esc_html(get_the_title()); ?></span>
+                                            <span itemprop="name"><?= esc_html(get_the_title()); ?></span>
                                         </figure>
                                     </div>
                                 </a>
@@ -118,13 +118,13 @@ get_header();
                         $date = get_sub_field('date');
                         $description = get_sub_field('description');
                         ?>
-                        <div class="experience">
+                        <div class="experience" itemscope itemtype="https://schema.org/Organization">
                             <p class="year">
                                 <?php if (!empty($date)) : ?>
-                                    <span class="date"><?= esc_html($date); ?></span><br>
+                                    <span class="date" itemprop="foundingDate"><?= esc_html($date); ?></span><br>
                                 <?php endif; ?>
                                 <?php if (!empty($description)) : ?>
-                                    <?= esc_html($description); ?>
+                                    <span itemprop="description"><?= esc_html($description); ?></span>
                                 <?php endif; ?>
                             </p>
                             <img src="<?= get_template_directory_uri(); ?>/assets/images/lantern-blue.svg" alt="Lanterne bleue illustrée">
@@ -152,15 +152,15 @@ get_header();
                         $title = get_sub_field('title');
                         $subtitle = get_sub_field('subtitle');
                         ?>
-                        <div class="tech">
+                        <div class="tech" itemscope itemtype="https://schema.org/DefinedTerm">
                             <div class="icon">
                                 <?php if ($icon): ?>
                                     <img src="<?= esc_url($icon['url']); ?>" alt="<?= esc_attr($icon['alt']); ?>">
                                 <?php endif; ?>
                             </div>
                             <div class="text wrapper">
-                                <p class="tech__title"><?= esc_html($title); ?></p>
-                                <p><?= esc_html($subtitle); ?></p>
+                                <p class="tech__title" itemprop="name"><?= esc_html($title); ?></p>
+                                <p itemprop="description"><?= esc_html($subtitle); ?></p>
                             </div>
                         </div>
                     <?php endwhile; ?>
@@ -169,7 +169,7 @@ get_header();
         </div>
     </section>
 
-    <section id="contactMe" class="contactMe-section" role="region" aria-labelledby="contact-title">
+    <section id="contactMe" class="contactMe-section" role="region" aria-labelledby="contact-title" itemscope itemtype="https://schema.org/ContactPoint">
         <div class="contact-me">
             <div class="text-wrapper">
                 <h2 id="contact-title">Un mot, un souffle</h2>
@@ -208,7 +208,7 @@ get_header();
                                 <div class="form-input-container">
                                     <div class="form-input-wrapper">
                                         <label for="familyname">Nom</label>
-                                        <input type="text" id="familyname" name="familyname" placeholder="Ex. Mark" aria-required="true">
+                                        <input type="text" id="familyname" name="familyname" itemprop="name" placeholder="Ex. Mark" aria-required="true">
                                     </div>
                                     <div class="form-input-wrapper">
                                         <label for="name">Prénom</label>
@@ -216,7 +216,7 @@ get_header();
                                     </div>
                                     <div class="form-input-wrapper">
                                         <label for="email">Email</label>
-                                        <input type="email" id="email" name="email" placeholder="Ex. marksmith@gmail.com" aria-required="true">
+                                        <input type="email" id="email" name="email" itemprop="email" placeholder="Ex. marksmith@gmail.com" aria-required="true">
                                     </div>
                                     <div class="form-input-wrapper">
                                         <label for="object">Sujet</label>

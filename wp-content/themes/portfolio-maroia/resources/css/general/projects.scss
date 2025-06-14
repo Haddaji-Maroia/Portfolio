@@ -4,6 +4,10 @@
   min-height: 800px;
   background: linear-gradient(#C4E5FC, #C4E5FC, #75A1BF);
 
+  .hidden{
+    visibility: hidden;
+  }
+
   .projects {
     padding: 100px 120px;
     position: relative;

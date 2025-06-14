@@ -168,12 +168,12 @@ header {
 .navbar__toggle {
   display: none;
   position: fixed;
-  top: 25px;
-  right: 25px;
+  top: 20px;
+  right: 20px;
   width: 30px;
   height: 22px;
   cursor: pointer;
-  z-index: 2001;
+  z-index: 3000;
   -webkit-tap-highlight-color: transparent;
 }
 .navbar__toggle .bar {
@@ -227,7 +227,9 @@ header {
   transition: transform 0.4s ease;
   position: relative;
   z-index: 1;
+
 }
+
 // Quando è attivo (menu aperto)
 .menu-toggle:checked ~ .offcanvas-menu {
   right: 0;
