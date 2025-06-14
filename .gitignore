@@ -1,2 +1,4 @@
 # ignora i backup di All-In-One WP Migration
 *.wpress
+wp-content/ai1wm-backups/
+wp-content/plugins/all-in-one-wp-migration/
