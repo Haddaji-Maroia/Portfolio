@@ -2,9 +2,18 @@
 
 // Single Project Page Styles
 
+.single-project .container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
 .single-project {
   padding: 6.25rem 7.5rem;
   background-color: #C4E5FC;
+  display: flex;
+  flex-direction: column;
 
   h1 {
     margin-bottom: 40px;

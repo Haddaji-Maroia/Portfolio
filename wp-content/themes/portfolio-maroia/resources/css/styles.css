@@ -1,3 +1,4 @@
+@charset "UTF-8";
 :root {
   --font-base: "Lora", Georgia, Times New Roman, serif;
   --font-title: "Playfair Display", Times New Roman, serif;
@@ -362,6 +363,8 @@ p {
 .projects-section .projects {
   padding: 100px 120px;
   position: relative;
+  display: flex;
+  flex-direction: column;
 }
 .projects-section .projects h2 {
   font-family: var(--font-title), serif;
@@ -1013,6 +1016,9 @@ header {
 
 .container {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* spazio tra menu e language switcher */
 }
 
 .menu {
@@ -1051,6 +1057,247 @@ header {
   transform: translateX(-50%) scaleX(1);
 }
 
+.language-switcher {
+  position: relative;
+  display: inline-block;
+  font-size: 1rem;
+  font-family: inherit;
+  margin-left: 50px;
+}
+
+.current-lang-btn,
+.lang-dropdown li a {
+  font-family: var(--font-base), serif;
+  display: block;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: normal;
+  text-align: left;
+  padding: 8px 12px;
+  text-decoration: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.current-lang-btn {
+  cursor: pointer;
+}
+
+.lang-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 9999;
+}
+
+.lang-dropdown li {
+  width: 100%;
+}
+
+/* Show dropdown on hover */
+.language-switcher:hover .lang-dropdown {
+  display: block;
+}
+
+.language-switcher .current-lang-btn,
+.language-switcher .lang-dropdown li a {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+}
+.language-switcher .current-lang-btn::after,
+.language-switcher .lang-dropdown li a::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -2px;
+  transform: translateX(-50%) scaleX(0);
+  transform-origin: center;
+  width: 100%;
+  height: 2px;
+  background-color: currentColor;
+  transition: transform 0.3s ease;
+}
+.language-switcher .current-lang-btn:hover::after, .language-switcher .current-lang-btn:focus::after, .language-switcher .current-lang-btn:active::after,
+.language-switcher .lang-dropdown li a:hover::after,
+.language-switcher .lang-dropdown li a:focus::after,
+.language-switcher .lang-dropdown li a:active::after {
+  transform: translateX(-50%) scaleX(1);
+}
+
+/* Nascondi checkbox */
+.menu-toggle {
+  display: none;
+}
+
+/* Burger icon */
+.navbar__toggle {
+  display: none;
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  width: 30px;
+  height: 22px;
+  cursor: pointer;
+  z-index: 2001;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.navbar__toggle .bar {
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: #1572B6;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: all 0.4s ease;
+}
+
+/* Animazione X */
+.menu-toggle:checked + .navbar__toggle .bar1 {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.menu-toggle:checked + .navbar__toggle .bar2 {
+  opacity: 0;
+}
+
+.menu-toggle:checked + .navbar__toggle .bar3 {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Offcanvas menu */
+.offcanvas-menu {
+  pointer-events: none;
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  right: -260px;
+  width: 260px;
+  height: 100vh;
+  background-color: #C4E5FC;
+  padding: 3rem 1.5rem;
+  box-shadow: -3px 0 10px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  transition: right 0.4s ease;
+  z-index: 2000;
+  overflow-y: auto;
+}
+
+.menu-toggle:checked ~ .offcanvas-menu {
+  right: 0;
+}
+
+/* Sposta contenuto pagina */
+.page-content {
+  transition: transform 0.4s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.menu-toggle:checked ~ .offcanvas-menu {
+  right: 0;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Menu principale desktop */
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 50px;
+  margin: 0;
+  padding: 0;
+}
+
+.menu a {
+  color: #1572B6;
+  text-decoration: none;
+}
+
+.menu a:hover {
+  color: #0c5172;
+}
+
+/* Offcanvas menu lista */
+.offcanvas-menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.offcanvas-menu-list li {
+  margin: 1rem 0;
+}
+
+.offcanvas-menu-list a {
+  font-size: 1.2rem;
+  color: #1572B6;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+
+.offcanvas-menu-list a:hover {
+  color: #0c5172;
+}
+
+/* Lingue offcanvas */
+.offcanvas-language-switcher ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.offcanvas-language-switcher li {
+  margin: 0.5rem 0;
+}
+
+.offcanvas-language-switcher a {
+  color: #1572B6;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.offcanvas-language-switcher a:hover {
+  color: #0c5172;
+}
+
+/* Burger menu visibile fino a 1050px */
+@media (max-width: 1050px) {
+  .navbar__toggle {
+    display: block;
+  }
+  .menu {
+    display: none;
+  }
+  /* Nascondi la lingua nella barra principale quando c'è il burger */
+  .language-switcher {
+    display: none;
+  }
+}
+@media (min-width: 1051px) {
+  .offcanvas-menu {
+    display: none;
+  }
+  /* Mostra la lingua normale desktop sopra 1050px */
+  .language-switcher {
+    display: block;
+  }
+}
 :root {
   --font-base: "Lora", Georgia, Times New Roman, serif;
   --font-title: "Playfair Display", Times New Roman, serif;
@@ -1292,9 +1539,18 @@ footer .footer-bottom {
   font-style: normal;
   font-display: swap;
 }
+.single-project .container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+}
+
 .single-project {
   padding: 6.25rem 7.5rem;
   background-color: #C4E5FC;
+  display: flex;
+  flex-direction: column;
 }
 .single-project h1 {
   margin-bottom: 40px;

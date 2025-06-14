@@ -30,6 +30,9 @@ header {
 
 .container {
   margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* spazio tra menu e language switcher */
 }
 
 .menu {
@@ -38,6 +41,7 @@ header {
   gap: 50px;
   margin: 0;
   padding: 0;
+
 
   a {
     text-decoration: none;
@@ -73,3 +77,244 @@ header {
     transform: translateX(-50%) scaleX(1);
   }
 }
+
+
+//switcher language
+
+.language-switcher {
+  position: relative;
+  display: inline-block;
+  font-size: 1rem;
+  font-family: inherit;
+  margin-left: 50px;
+}
+
+.current-lang-btn,
+.lang-dropdown li a {
+  font-family: var(--font-base), serif;
+  display: block;
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  font-weight: normal;
+  text-align: left;
+  padding: 8px 12px;
+  text-decoration: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.current-lang-btn {
+  cursor: pointer;
+}
+
+.lang-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  z-index: 9999;
+}
+
+.lang-dropdown li {
+  width: 100%;
+}
+
+
+/* Show dropdown on hover */
+.language-switcher:hover .lang-dropdown {
+  display: block;
+}
+
+.language-switcher {
+  .current-lang-btn,
+  .lang-dropdown li a {
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -2px;
+      transform: translateX(-50%) scaleX(0);
+      transform-origin: center;
+      width: 100%;
+      height: 2px;
+      background-color: currentColor;
+      transition: transform 0.3s ease;
+    }
+
+    &:hover::after,
+    &:focus::after,
+    &:active::after {
+      transform: translateX(-50%) scaleX(1);
+    }
+  }
+}
+
+// menu burger
+
+/* Nascondi checkbox */
+.menu-toggle {
+  display: none;
+}
+
+/* Burger icon */
+.navbar__toggle {
+  display: none;
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  width: 30px;
+  height: 22px;
+  cursor: pointer;
+  z-index: 2001;
+  -webkit-tap-highlight-color: transparent;
+}
+.navbar__toggle .bar {
+  display: block;
+  width: 100%;
+  height: 4px;
+  background-color: #1572B6;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: all 0.4s ease;
+}
+
+/* Animazione X */
+.menu-toggle:checked + .navbar__toggle .bar1 {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.menu-toggle:checked + .navbar__toggle .bar2 {
+  opacity: 0;
+}
+.menu-toggle:checked + .navbar__toggle .bar3 {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Offcanvas menu */
+.offcanvas-menu {
+  pointer-events: none; // blocca click finché chiuso
+  opacity: 0;
+  position: fixed;
+  top: 0;
+  right: -260px;
+  width: 260px;
+  height: 100vh;
+  background-color: #C4E5FC;
+  padding: 3rem 1.5rem;
+  box-shadow: -3px 0 10px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  transition: right 0.4s ease;
+  z-index: 2000;
+  overflow-y: auto;
+}
+.menu-toggle:checked ~ .offcanvas-menu {
+  right: 0;
+}
+
+/* Sposta contenuto pagina */
+.page-content {
+  transition: transform 0.4s ease;
+  position: relative;
+  z-index: 1;
+}
+// Quando è attivo (menu aperto)
+.menu-toggle:checked ~ .offcanvas-menu {
+  right: 0;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* Menu principale desktop */
+.menu {
+  list-style: none;
+  display: flex;
+  gap: 50px;
+  margin: 0;
+  padding: 0;
+}
+.menu a {
+  color: #1572B6;
+  text-decoration: none;
+}
+.menu a:hover {
+  color: #0c5172;
+}
+
+/* Offcanvas menu lista */
+.offcanvas-menu-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+.offcanvas-menu-list li {
+  margin: 1rem 0;
+}
+.offcanvas-menu-list a {
+  font-size: 1.2rem;
+  color: #1572B6;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+}
+.offcanvas-menu-list a:hover {
+  color: #0c5172;
+}
+
+/* Lingue offcanvas */
+.offcanvas-language-switcher ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  text-align: center;
+}
+.offcanvas-language-switcher li {
+  margin: 0.5rem 0;
+}
+.offcanvas-language-switcher a {
+  color: #1572B6;
+  text-decoration: none;
+  font-weight: bold;
+}
+.offcanvas-language-switcher a:hover {
+  color: #0c5172;
+}
+
+/* Burger menu visibile fino a 1050px */
+@media (max-width: 1050px) {
+  .navbar__toggle {
+    display: block;
+  }
+  .menu {
+    display: none;
+  }
+  /* Nascondi la lingua nella barra principale quando c'è il burger */
+  .language-switcher {
+    display: none;
+  }
+}
+
+@media (min-width: 1051px) {
+  .offcanvas-menu {
+    display: none;
+  }
+  /* Mostra la lingua normale desktop sopra 1050px */
+  .language-switcher {
+    display: block;
+  }
+}
+
+
