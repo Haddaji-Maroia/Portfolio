@@ -136,6 +136,9 @@ p {
     left: -60px;
     width: 350px;
   }
+  .subtitle {
+    font-size: 20px;
+  }
 }
 /* Mobile */
 @media (max-width: 600px) {
@@ -187,6 +190,11 @@ p {
   padding: 50px;
   /* decorations corner */
   /* decorations illustration */
+}
+@media (max-width: 992px) {
+  .about-me {
+    padding: 20px 10px;
+  }
 }
 .about-me .presentation {
   font-family: var(--font-base), serif;
@@ -296,6 +304,13 @@ p {
     width: 90px;
     top: -50px;
     right: -10px;
+  }
+}
+@media (max-width: 992px) {
+  .about-me .lantern__chinese {
+    width: 90px;
+    top: -20px;
+    right: -3px;
   }
 }
 
@@ -446,7 +461,7 @@ p {
   }
 }
 .history-section {
-  background-image: url("/wp-content/themes/portfolio-maroia/assets/images/mountains-back2.svg");
+  background-image: url("/wp-content/themes/portfolio-maroia/public/assets/images/mountains-back2.svg");
   background-position: left bottom -30px;
   background-size: contain;
   background-repeat: no-repeat;
@@ -905,7 +920,7 @@ header {
 /* Burger icon */
 .navbar__toggle {
   display: none;
-  position: fixed;
+  position: absolute;
   top: 20px;
   right: 20px;
   width: 30px;

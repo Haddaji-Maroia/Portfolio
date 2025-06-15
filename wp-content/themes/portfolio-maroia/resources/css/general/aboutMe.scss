@@ -4,6 +4,10 @@
 .about-me {
   padding: 50px;
 
+  @media (max-width: 992px) {
+    padding: 20px 10px;
+  }
+
   .presentation {
     font-family: var(--font-base), serif;
     position: relative;
@@ -114,14 +118,19 @@
 
     @media (max-width: 900px) {
       width: 90px;
-      top: -50px;     // 👈 aggiunto per mantenere fisso
-      right: -10px;   // 👈 aggiunto per mantenere fisso
+      top: -50px;
+      right: -10px;
     }
 
     @media (max-width: 600px) {
       width: 90px;
-      top: -50px;     // 👈 ancora qui
-      right: -10px;   // 👈 ancora qui
+      top: -50px;
+      right: -10px;
+    }
+    @media (max-width: 992px) {
+      width: 90px;
+      top: -20px;
+      right: -3px;
     }
   }
 
