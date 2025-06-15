@@ -4,7 +4,8 @@
   "main": "package.json.js",
   "scripts": {
     "dev": "vite",
-    "build": "vite build"
+    "build:css": "sass resources/css:dist/css --no-source-map",
+    "watch:css": "sass --watch resources/css:dist/css --no-source-map"
   },
   "keywords": [],
   "author": "",

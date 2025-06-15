@@ -14,11 +14,14 @@ add_filter('use_widgets_block_editor', '__return_false');
 function portfolio_enqueue_assets() {
     $manifest = json_decode(file_get_contents(get_template_directory() . '/public/.vite/manifest.json'), true);
 
-    // CSS
-    if (isset($manifest['resources/css/styles.scss']['file'])) {
+    // CSS compilato da SASS
+    $css_file = '/dist/css/styles.css';
+    if ( file_exists( get_template_directory() . $css_file ) ) {
         wp_enqueue_style(
             'portfolio-style',
-            get_template_directory_uri() . '/public/' . $manifest['resources/css/styles.scss']['file']
+            get_template_directory_uri() . $css_file,
+            [],
+            filemtime( get_template_directory() . $css_file )
         );
     }
 
