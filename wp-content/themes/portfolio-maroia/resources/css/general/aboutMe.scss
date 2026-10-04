@@ -1,149 +1,211 @@
-@use "../settings/fonts";
+.about-page {
+  background: linear-gradient(180deg, #C4E5FC 0%, #FFF 35%);
+  color: #1F2D3D;
 
-
-.about-me {
-  padding: 50px;
-
-  @media (max-width: 992px) {
-    padding: 20px 10px;
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 24px;
   }
 
-  .presentation {
-    font-family: var(--font-base), serif;
-    position: relative;
-    padding: 100px 70px;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    gap: 40px;
+  h1, h2, h3 {
+    font-family: var(--font-title), serif;
+    font-weight: 400;
     color: #428BBC;
+    margin: 0;
+  }
 
-    h2 {
-      margin-bottom: 40px;
+  h1 { font-size: clamp(40px, 7vw, 64px); line-height: 1.05; }
+  h2 { font-size: clamp(28px, 4vw, 40px); }
+
+  .hanzi,
+  .hanzi-row li {
+    color: #428BBC;
+    font-size: 0.95rem;
+
+    span { font-size: 1.6rem; margin-right: 6px; }
+  }
+
+  // INTRO
+  .about-intro {
+    padding-top: calc(var(--nav-h, 80px) + 40px);
+
+    .about-lead {
+      margin: 24px 0 8px;
       font-family: var(--font-title), serif;
-      font-weight: bold;
+      font-size: clamp(20px, 3vw, 26px);
+      color: #428BBC;
     }
 
-    .text-about {
-      p {
-        font-size: 1rem;
-        margin-bottom: 20px;
-        line-height: 1.6;
-        margin-right: 30px;
-        max-width: 500px;
+    p {
+      max-width: none;
+      line-height: 1.7;
+    }
+  }
+
+  // JOURNEY
+  .about-sub {
+    margin: 8px 0 40px;
+    color: #428BBC;
+    font-size: clamp(16px, 2vw, 20px);
+  }
+
+  .timeline {
+    list-style: none;
+    margin: 0 0 0 12px;
+    padding: 0 0 0 36px;
+    border-left: 1px solid #428BBC;
+
+    li {
+      position: relative;
+      padding-bottom: 32px;
+
+      &::before {
+        content: "✿";
+        position: absolute;
+        left: -49px;
+        top: -4px;
+        width: 26px;
+        text-align: center;
+        font-size: 1.3rem;
+        color: #428BBC;
+        background: #fff;
       }
+
+      &:last-child { padding-bottom: 0; }
     }
 
-    @media (max-width: 900px) {
-      flex-direction: column-reverse;
-      text-align: center;
+    .timeline__year {
+      font-family: var(--font-title), serif;
+      font-size: 1.5rem;
+      color: #428BBC;
     }
 
-    @media (max-width: 600px) {
-      flex-direction: column-reverse;
-      padding: 50px 20px;
-    }
+    p { margin: 4px 0 0; }
   }
 
-  .circle {
-    @media (max-width: 900px) {
-      width: 100%;
-      margin-top: 30px;
-    }
+  // WHAT I DO: SIGILLI HANKO
+  .seal-groups {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px 40px;
+    margin-top: 40px;
   }
 
-  /* decorations corner */
-  .corner-about {
-    position: absolute;
-    z-index: 0;
-
-    &.corner-top-left-about {
-      top: 0;
-      left: 0;
-      transform: translate(-50%, -50%);
+  .seal-group {
+    h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.4rem;
     }
 
-    &.corner-bottom-right-about {
-      bottom: 0;
-      right: 0;
-      transform: translate(50%, 50%) rotate(180deg);
-    }
-
-    @media (max-width: 768px) {
-      width: 300px;
+    > p {
+      margin: 8px 0 0;
+      line-height: 1.6;
+      max-width: 34ch;
     }
   }
 
-  /* decorations illustration */
-  .illustration {
-    position: relative;
-    width: 300px;
-    height: 300px;
+  .seal-group__hanzi {
+    font-size: 1.6rem;
+    color: #2f6a94;
+    opacity: 0.55;
   }
 
-  .circle-container {
-    position: relative;
-    width: 100%;
-    height: 100%;
+  .seals {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    list-style: none;
+    margin: 28px 0 0;
+    padding: 0;
   }
 
-  .circle {
-    display: block;
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-    z-index: 1;
-    position: relative;
-  }
+  .seal {
+    --ink: #2f6a94;
+    display: grid;
+    place-items: center;
+    width: 78px;
+    height: 78px;
+    padding: 6px;
+    box-sizing: border-box;
+    font-family: var(--font-title), serif;
+    font-size: 0.95rem;
+    line-height: 1.1;
+    text-align: center;
+    color: var(--ink);
+    border: 3px solid var(--ink);
+    border-radius: 6px;
+    box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 4.5px var(--ink);
+    background:
+            radial-gradient(circle at 20% 25%, rgba(47, 106, 148, 0.12) 0 6%, transparent 7%),
+            radial-gradient(circle at 78% 70%, rgba(47, 106, 148, 0.1) 0 8%, transparent 9%),
+            #fff;
+    transform: rotate(var(--r, 0deg));
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: default;
 
-  .avatar {
-    position: absolute;
-    bottom: -30px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 450px;
-    z-index: 2;
-    filter: drop-shadow(0 8px 8px rgba(0, 0, 0, 0.25));
-    transition: transform 0.3s ease;
-  }
-
-  .lantern__chinese {
-    position: absolute;
-    width: 130px;
-    top: -50px;
-    right: -10px;
-    z-index: 3;
-    animation: swing 3s ease-in-out infinite;
-    transform-origin: top center;
-
-    @media (max-width: 900px) {
-      width: 90px;
-      top: -50px;
-      right: -10px;
+    &:hover {
+      transform: rotate(0deg) translateY(3px) scale(0.97);
+      box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 4.5px var(--ink), 0 0 0 4px rgba(66, 139, 188, 0.15);
     }
 
-    @media (max-width: 600px) {
-      width: 90px;
-      top: -50px;
-      right: -10px;
-    }
-    @media (max-width: 992px) {
-      width: 90px;
-      top: -20px;
-      right: -3px;
-    }
+    // inclinazione "stampata a mano"
+    &:nth-child(5n + 1) { --r: -4deg; }
+    &:nth-child(5n + 2) { --r: 3deg; }
+    &:nth-child(5n + 3) { --r: -2deg; }
+    &:nth-child(5n + 4) { --r: 4deg; }
+    &:nth-child(5n + 5) { --r: -3deg; }
   }
 
-}
+  .seal--wide { width: 118px; }
 
-@keyframes swing {
-  0% {
-    transform: rotate(5deg);
+  .seal--draft {
+    --ink: #6aa3c9;
+    border-style: dashed;
+    box-shadow: none;
+    background: transparent;
+
+    &:hover { box-shadow: 0 0 0 4px rgba(66, 139, 188, 0.12); }
   }
-  50% {
-    transform: rotate(-5deg);
+
+  // BEYOND THE SCREEN
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 20px;
+    margin-top: 40px;
   }
-  100% {
-    transform: rotate(5deg);
+
+  .card {
+    padding: 24px;
+    background: #fff;
+    border: 1px solid #C4E5FC;
+    border-radius: 22px 22px 22px 4px;
+
+    &:nth-child(even) { border-radius: 22px 4px 22px 22px; }
+
+    .card__icon { font-size: 1.5rem; }
+    h3 { margin: 8px 0 4px; font-size: 1rem; font-family: inherit; }
+    p { margin: 0; font-family: var(--font-title), serif; font-size: 1.15rem; line-height: 1.4; }
+  }
+
+  .hanzi-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: 56px 0 0;
+    padding: 0;
+  }
+
+  @media (max-width: 900px) {
+    .seal-groups { grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .seal { transition: none; }
   }
 }

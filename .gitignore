@@ -1,18 +1,28 @@
-# ignora i backup di All-In-One WP Migration
+# backup di All-In-One WP Migration
 *.wpress
 wp-content/ai1wm-backups/
 wp-content/plugins/all-in-one-wp-migration/
 
+# ignora tutto, poi riaggiungi solo quello che serve
 *
 !.gitignore
+!vite.config.js
+!package.json
+!postcss.config.js
+
 !wp-content/
 wp-content/*
 !wp-content/themes/
 wp-content/themes/*
-!wp-content/themes/portfolio/
-!wp-content/themes/portfolio/*
-!wp-content/themes/portfolio/**/*
-!vite.config.js
-!package.json
-!postcss.config.js
+
+# il tuo tema
+!wp-content/themes/portfolio-maroia/
+wp-content/themes/portfolio-maroia/*
+!wp-content/themes/portfolio-maroia/**
+
+# ...ma non i file generati o inutili (devono stare DOPO le eccezioni sopra)
+node_modules/
 .DS_Store
+.idea/
+wp-content/themes/portfolio-maroia/resources/js/main.js
+wp-config.php

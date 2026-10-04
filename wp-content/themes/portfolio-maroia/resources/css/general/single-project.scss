@@ -1,219 +1,239 @@
-@use "../settings/fonts";
-
-// Single Project Page Styles
-
-.single-project .container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 100%;
+// l'header torna nel flusso in questa pagina (vince anche sulla vecchia regola !important)
+body.single-projets header {
+  position: relative !important;
 }
 
 .single-project {
-  padding: 6.25rem 7.5rem;
-  background-color: #C4E5FC;
-  display: flex;
-  flex-direction: column;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 80px; // distanza dalla nav
+  color: #1F2D3D;
 
-  h1 {
-    margin-bottom: 40px;
-  }
-
-  .project_presentation {
-    border-radius: 10px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4rem;
-    margin-bottom: 40px;
-
-  }
-
-  .image_cover {
-    background-color: #1e6b9d;
-    width: 200px;
-    height: 280px;
-    flex-shrink: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    padding: 1rem;
-  }
-
-  figure {
+  h1, h2, h3 {
+    font-family: var(--font-title), serif;
+    font-weight: 400;
+    color: #428BBC;
     margin: 0;
+  }
 
-    img {
-      border-radius: 10px;
-      width: 100%;
-      height: auto;
-      max-width: 200px;
-      display: block;
+  h2 { font-size: clamp(24px, 3vw, 32px); }
+
+  // HERO: link a sinistra, titolo centrato, stessa riga
+  .sp-hero {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 32px;
+
+    .sp-back { justify-self: start; }
+
+    h1 {
+      grid-column: 2;
+      text-align: center;
+      font-size: clamp(36px, 6vw, 60px);
+      line-height: 1.05;
+    }
+
+    @media (max-width: 700px) {
+      grid-template-columns: 1fr;
+      justify-items: center;
+
+      .sp-back { justify-self: start; }
+      h1 { grid-column: 1; }
     }
   }
 
-  .content {
-    font-size: 1.1rem;
-    line-height: 1.6;
-    margin-bottom: 2rem;
-  }
-
-  .bloc_technologies {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: flex-start;
-
-    .tech-badge {
-      flex: 0 0 auto; // non si allarga troppo
-    }
-  }
-
-
-  a {
-    display: inline-block;
-    margin-top: 1rem;
-    color: #fff;
-    background-color: #0073aa;
-    padding: 0.5rem 1rem;
+  .sp-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 16px;
+    font-size: 0.9rem;
+    color: #428BBC;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+    border: 1px solid #C4E5FC;
+    border-radius: 999px;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 
     &:hover {
-      background-color: #005f8d;
+      background: #eef7fd;
+      border-color: #428BBC;
     }
   }
 
-  .tech_title {
-    margin-bottom: 20px;
-  }
+  // GALLERIA A MOSAICO
+  .sp-gallery__grid {
+    column-count: 3;
+    column-gap: 16px;
+    scroll-margin-top: 24px;
 
-  .tech-badge {
-    background-color: #1e6b9d;
-    color: #fff;
-    padding: 10px;
-    border-radius: 10px;
-  }
+    figure {
+      margin: 0 0 16px;
+      break-inside: avoid;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #3B7EA8;
+    }
 
-  .text_projet {
     a {
-      margin-bottom: 50px;
-      background: none;
-      color: #0c5172;
-      text-decoration: underline;
-
-      &:hover {
-        color: #9c64bb;
-        background: none;
-      }
-
-    }
-  }
-
-  .explaination {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-
-    .cardproject {
-      background-color: #fff;
-      padding: 50px;
-      border-radius: 30px;
-      flex: 1 1 300px;
-
-
-      h3{
-        font-family: var(--font-title), serif;
-        margin-bottom: 20px;
-      }
-    }
-  }
-}
-
-// Responsive (optional)
-@media (max-width: 768px) {
-  .single-project {
-    padding: 2rem 1rem;
-
-    .project_presentation {
-      flex-direction: column;
-      gap: 1.5rem;
-      align-items: center;  // centra contenuti
-
-      .image_cover figure img {
-        max-width: 100%;
-        height: auto;
-        border-radius: 10px;
-      }
-
-      .text_projet {
-        width: 100%;
-        a {
-          margin-bottom: 1.5rem;
-          display: inline-block;
-          font-size: 1rem;
-        }
-        p {
-          font-size: 1rem;
-          line-height: 1.4;
-        }
-        .bloc_technologies {
-          justify-content: center; // centrare le badge su schermi piccoli
-        }
-      }
-    }
-
-    .explaination {
-      flex-direction: column;
-      gap: 1.5rem;
-
-      .cardproject {
-        padding: 2rem 1rem;
-      }
-    }
-  }
-}
-
-
-
-// GALLERY IMAGES PROJECTS
-
-.project-gallery {
-  margin-top: 3rem;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.5rem;
-
-  h2 {
-    grid-column: 1 / -1;
-    font-size: 1.8rem;
-    margin-bottom: 1rem;
-    text-align: center;
-    color: #333;
-  }
-
-  figure {
-    margin: 0;
-    overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-    &:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      display: block;
+      cursor: zoom-in;
     }
 
     img {
       display: block;
       width: 100%;
       height: auto;
-      object-fit: cover;
-      border-radius: 12px;
+      transition: transform 0.5s ease;
     }
+
+    a:hover img,
+    a:focus-visible img {
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 900px) { column-count: 2; }
+    @media (max-width: 560px) { column-count: 1; }
+  }
+
+  // INTRO: testo + tecnologie
+  .sp-intro {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 48px;
+    margin-top: 56px;
+    align-items: start;
+
+    p {
+      margin: 0;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+  }
+
+  .sp-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+
+  .sp-btn {
+    display: inline-block;
+    padding: 10px 28px;
+    color: #428BBC;
+    text-decoration: none;
+    border: 1px solid #428BBC;
+    border-radius: 999px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:hover,
+    &--filled {
+      background: #428BBC;
+      color: #fff;
+    }
+
+    &--filled:hover { background: #2f6a94; }
+  }
+
+  .sp-tech {
+    padding: 24px;
+    background: #fff;
+    border: 1px solid #C4E5FC;
+    border-radius: 22px 22px 22px 4px;
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      list-style: none;
+      margin: 16px 0 0;
+      padding: 0;
+    }
+
+    li {
+      padding: 6px 16px;
+      font-size: 0.9rem;
+      color: #2f6a94;
+      background: #eef7fd;
+      border-radius: 999px;
+    }
+  }
+
+  // CARD SPIEGAZIONI
+  .sp-about { margin-top: 64px; }
+
+  .sp-about__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .sp-card {
+    padding: 28px;
+    background: linear-gradient(180deg, #eef7fd 0%, #fff 100%);
+    border: 1px solid #C4E5FC;
+    border-radius: 16px;
+
+    h3 { font-size: 1.3rem; }
+    p { margin: 12px 0 0; line-height: 1.7; }
+  }
+
+  .sp-footer {
+    margin-top: 64px;
+    text-align: center;
+  }
+
+  @media (max-width: 800px) {
+    .sp-intro { grid-template-columns: 1fr; gap: 32px; }
   }
 }
 
+// LIGHTBOX SOLO CSS (fuori da .single-project: gli overlay stanno a tutto schermo)
+.lb {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  place-items: center;
+  background: rgba(15, 35, 55, 0.92);
+
+  &:target { display: grid; }
+}
+
+.lb__bg {
+  position: absolute;
+  inset: 0;
+  cursor: zoom-out;
+}
+
+.lb__img {
+  position: relative;
+  max-width: min(92vw, 1400px);
+  max-height: 86vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.lb__btn {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  font-size: 2rem;
+  line-height: 1;
+  color: #fff;
+  text-decoration: none;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+
+  &:hover,
+  &:focus-visible { background: rgba(255, 255, 255, 0.3); }
+}
+
+.lb__close { top: 20px; right: 20px; }
+.lb__prev  { left: 20px; top: 50%; transform: translateY(-50%); }
+.lb__next  { right: 20px; top: 50%; transform: translateY(-50%); }

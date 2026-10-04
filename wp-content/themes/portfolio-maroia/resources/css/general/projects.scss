@@ -1,28 +1,30 @@
 @use "../settings/fonts";
 
 .projects-section {
-  min-height: 800px;
-  background: linear-gradient(#C4E5FC, #C4E5FC, #75A1BF);
-
-  .hidden{
+  .hidden {
     visibility: hidden;
   }
 
   .projects {
-    padding: 100px 120px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 64px 24px;
 
     h2 {
       font-family: var(--font-title), serif;
-      margin-bottom: 50px;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 400;
+      color: #428BBC;
+      margin: 0;
     }
 
-    @media (max-width: 700px) {
-      padding: 50px 80px;
+    .projects__subtitle {
+      margin: 8px 0 40px;
+      font-size: clamp(16px, 2vw, 20px);
+      color: #428BBC;
     }
 
+    // FILTRI (pagina Projets)
     .filter-buttons {
       display: flex;
       gap: 20px;
@@ -51,110 +53,121 @@
       }
     }
 
-    // CONTENITORE PROGETTI
-    .project-container {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: center;
-      padding: 50px 0;
-      gap: 40px;
+    // GRIGLIA 2x2
+    .projects__grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px 32px;
 
-      .project {
-        .floating {
-          animation: float-up-down 4s ease-in-out infinite alternate-reverse both;
+      @media (max-width: 768px) {
+        grid-template-columns: 1fr;
+      }
+    }
 
-          .project-card {
-            width: 248px;
-            height: 310px;
-            background-color: #1e6b9d;
-            border-radius: 10px;
-            overflow: hidden;
-            display: flex;
-            position: relative;
-            flex-direction: column;
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-            box-shadow 0.4s ease;
-            text-decoration: none;
-            color: inherit;
+    // CARD
+    .project-card {
+      display: block;
+      color: inherit;
+      text-decoration: none;
 
-            &:hover {
-              transform: scale(1.1);
-              box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
-              opacity: 1;
+      .project-card__media {
+        aspect-ratio: 4 / 3;
+        overflow: hidden;            // lo zoom resta dentro la card
+        transform: translateZ(0);    // evita bordi sottili durante lo zoom
 
-              img {
-                transform: scale(1.05);
-              }
-            }
-
-            .project-cover {
-              figure {
-                position: relative;
-                width: 100%;
-                height: 100%;
-                margin: 0;
-
-                img {
-                  width: 100%;
-                  height: 100%;
-                  object-fit: cover;
-                  border-radius: 10px;
-                  transition: transform 0.5s ease;
-                }
-
-                span {
-                  font-family: var(--font-title), serif;
-                  font-size: 1.3rem;
-                  font-weight: bold;
-                  color: #1e6b9d;
-                  position: absolute;
-                  bottom: 65px;
-                  left: 50%;
-                  width: 100%;
-                  text-align: center;
-                  transform: translateX(-50%);
-                  background-color: rgba(255, 255, 255, 0.7);
-                  padding: 10px 16px;
-                  border-radius: 8px;
-                  transition: opacity 0.3s ease;
-                }
-              }
-            }
-          }
+        img {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;         // riempie tutto lo spazio
+          object-position: center top;
+          transition: transform 0.5s ease;
         }
       }
-    }
 
-    .btn-projects {
-      display: inline-block;
-      padding: 12px 50px;
-      background-color: #2577a4;
-      color: white;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 400;
-      transition: background-color 0.3s ease;
+      &:hover .project-card__media img {
+        transform: scale(1.05);
+      }
 
-      &:hover {
-        background-color: #155b82;
+      .project-card__title {
+        margin: 10px 0 0;
+        font-size: 16px;
+        font-weight: 400;
+        color: #1F2D3D;
       }
     }
 
-    .button-wrapper {
-      text-align: center;
+    // BOTTONE "SEE MORE"
+    .btn-outline {
+      display: block;
+      width: fit-content;
+      margin: 40px auto 0;
+      padding: 10px 40px;
+      border: 1px solid #428BBC;
+      border-radius: 999px;
+      color: #428BBC;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+
+      &:hover {
+        background-color: #428BBC;
+        color: #fff;
+      }
     }
   }
 }
 
-@keyframes float-up-down {
-  0% {
-    transform: translateY(0px);
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.projects-page {
+  padding-top: 0; // l'header ora occupa già il suo spazio
+  background: linear-gradient(180deg, #C4E5FC 0%, #FFF 30%);
+  min-height: 100vh;
+
+  .projects {
+    padding-top: 100px; // distanza dalla nav
   }
-  50% {
-    transform: translateY(-10px);
-  }
-  100% {
-    transform: translateY(0px);
+
+  // FILTRI: stesso stile di "See more" (selettore più forte, vince sul vecchio)
+  &.projects-section .projects .filter-buttons {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    margin: 0 0 32px;
+
+    button {
+      padding: 10px 40px;
+      min-width: 0;
+      font: inherit;
+      font-weight: 400;
+      color: #428BBC;
+      background: transparent;
+      border: 1px solid #428BBC;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, color 0.3s ease;
+
+      &:hover,
+      &.active {
+        background-color: #428BBC;
+        color: #fff;
+      }
+
+      &:focus-visible {
+        outline: 2px solid #C4E5FC;
+        outline-offset: 2px;
+      }
+    }
   }
 }

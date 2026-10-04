@@ -13,16 +13,14 @@
     <nav class="main-navigation" role="navigation" aria-label="Navigation principale">
 
         <?php
-        if (function_exists('the_custom_logo')) {
-            $custom_logo_id = get_theme_mod('custom_logo');
-            $logo = wp_get_attachment_image_src($custom_logo_id, 'full');
-            if ($logo) {
-                echo '<img class="logo" src="' . esc_url($logo[0]) . '" alt="' . esc_attr(get_bloginfo('name')) . '">';
-            } else {
-                echo '<h1 class="site-title">' . esc_html(get_bloginfo('name')) . '</h1>';
-            }
-        }
+        $custom_logo_id = get_theme_mod('custom_logo');
+        $logo = wp_get_attachment_image_src($custom_logo_id, 'full');
         ?>
+        <a href="<?php echo esc_url(home_url('/')); ?>" class="logo-link" aria-label="Retour à l’accueil">
+            <?php if ($logo) : ?>
+                <img class="logo" src="<?php echo esc_url($logo[0]); ?>" alt="<?php echo esc_attr(get_bloginfo('name')); ?>">
+            <?php endif; ?>
+        </a>
 
         <!-- Checkbox toggle -->
         <input type="checkbox" id="menu-toggle" class="menu-toggle" aria-hidden="true" />
