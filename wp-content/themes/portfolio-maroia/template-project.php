@@ -1,44 +1,55 @@
 <?php /* Template Name: Page : "Projets" */ ?>
 <?php get_header(); ?>
 
+<?php
+$page_title = get_field('title');
+$page_desc  = get_field('description');
+$all_label  = get_field('filter_all');
+
+$lang = function_exists('pll_current_language') ? pll_current_language() : '';
+
+// progetti nella lingua corrente
+$query_args = [
+        'post_type'      => 'projets',
+        'posts_per_page' => -1,
+        'orderby'        => 'menu_order',
+        'order'          => 'ASC',
+];
+if ($lang) {
+    $query_args['lang'] = $lang;
+}
+$projects = new WP_Query($query_args);
+$types = [];
+foreach ($projects->posts as $p) {
+    $terms = get_the_terms($p->ID, 'type_projet');
+    if ($terms && !is_wp_error($terms)) {
+        foreach ($terms as $t) {
+            $types[$t->slug] = $t->name;
+        }
+    }
+}
+?>
+
     <section id="projects" class="projects-section projects-page">
         <div class="projects">
-            <h1 class="sr-only">Projects page</h1>
+            <h1 class="sr-only"><?php the_title(); ?></h1>
 
-            <h2>
-                <?php $title = get_field('title'); ?>
-                <?= $title ? esc_html($title) : ''; ?>
-            </h2>
+            <?php if ($page_title) : ?><h2><?= esc_html($page_title); ?></h2><?php endif; ?>
+            <?php if ($page_desc) : ?><p class="projects__subtitle"><?= esc_html($page_desc); ?></p><?php endif; ?>
 
-            <p class="projects__subtitle">
-                <?php $description = get_field('description'); ?>
-                <?= $description ? esc_html($description) : ''; ?>
-            </p>
-
-            <!-- Filter Buttons -->
-            <div class="filter-buttons">
-                <button data-filter="all" class="active">Tous</button>
-                <button data-filter="web">Web</button>
-                <button data-filter="mobile">Mobile</button>
-                <button data-filter="design">Design</button>
-            </div>
-
-            <!-- Projects Grid -->
-            <?php
-            $projects = new WP_Query([
-                    'post_type'      => 'projets',
-                    'posts_per_page' => -1,
-                    'orderby'        => 'menu_order',
-                    'order'          => 'ASC',
-            ]);
-            ?>
+            <?php if ($types) : ?>
+                <div class="filter-buttons" role="group">
+                    <button type="button" data-filter="all" class="active"><?= esc_html($all_label); ?></button>
+                    <?php foreach ($types as $slug => $name) : ?>
+                        <button type="button" data-filter="<?= esc_attr($slug); ?>"><?= esc_html($name); ?></button>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
 
             <?php if ($projects->have_posts()) : ?>
                 <div class="projects__grid">
                     <?php while ($projects->have_posts()) : $projects->the_post();
-
-                        // tassonomia "type_projet" -> classi sulla card
-                        $terms = get_the_terms(get_the_ID(), 'type_projet');
+                        $terms   = get_the_terms(get_the_ID(), 'type_projet');
                         $classes = 'project-card project';
                         if ($terms && !is_wp_error($terms)) {
                             foreach ($terms as $term) {
@@ -56,13 +67,10 @@
                         </a>
                     <?php endwhile; wp_reset_postdata(); ?>
                 </div>
-            <?php else : ?>
-                <p>Aucun projet trouvé.</p>
             <?php endif; ?>
         </div>
     </section>
 
-    <!-- JS per filtro progetti -->
     <script>
         document.addEventListener("DOMContentLoaded", function () {
             const buttons = document.querySelectorAll(".filter-buttons button");
@@ -76,11 +84,8 @@
                     button.classList.add("active");
 
                     projects.forEach(project => {
-                        if (filter === "all" || project.classList.contains(filter)) {
-                            project.style.display = "";
-                        } else {
-                            project.style.display = "none";
-                        }
+                        project.style.display =
+                            (filter === "all" || project.classList.contains(filter)) ? "" : "none";
                     });
                 });
             });

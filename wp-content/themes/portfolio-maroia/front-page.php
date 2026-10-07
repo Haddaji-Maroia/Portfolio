@@ -4,69 +4,70 @@ get_header();
 ?>
 
 <main>
+    <?php
+    $hero_title    = get_field('title') ?: "hi, I'm Marwa";
+    $hero_subtitle = get_field('subtitle_title') ?: 'Web developer & designer';
+    ?>
     <section id="landing" class="landing" role="region" aria-label="Section d’accueil" itemscope itemtype="https://schema.org/Person">
         <div class="content">
             <h1 class="title" itemprop="name">
-                <?php $title = get_field('title') ?>
-                <span style="display:flex;align-items:center;justify-content:center;gap:10px;line-height:1;">
-                    <span><?= $title !== '' ? esc_html($title) : '' ?></span>
-                        <img src="<?php echo esc_url(get_template_directory_uri() . '/assets/images/peonie.png'); ?>"
-                             alt="" aria-hidden="true"
-                             class="peony">
-                    </span>
-                <span class="subtitle" itemprop="jobTitle" style="display:block;">Web developer &amp; designer</span>
+            <span class="title-row">
+                <span class="title-text"><?= esc_html($hero_title); ?></span>
+                <img src="<?= esc_url(get_template_directory_uri() . '/assets/images/peonie.png'); ?>"
+                     alt="" aria-hidden="true"
+                     class="peony">
+            </span>
+                <span class="subtitle" itemprop="jobTitle"><?= esc_html($hero_subtitle); ?></span>
             </h1>
-            <div class="clouds">
+
+            <div class="clouds" aria-hidden="true">
                 <img class="cloud cloud-left oscillate"
-                     src="<?php echo get_template_directory_uri(); ?>/assets/images/clouds-left.svg"
-                     alt="Grosse nuage style chinois">
+                     src="<?= esc_url(get_template_directory_uri() . '/assets/images/clouds-left.svg'); ?>" alt="">
                 <img class="cloud cloud-right oscillate"
-                     src="<?php echo get_template_directory_uri(); ?>/assets/images/clouds-right.svg"
-                     alt="Petit nuage style chinois">
+                     src="<?= esc_url(get_template_directory_uri() . '/assets/images/clouds-right.svg'); ?>" alt="">
             </div>
         </div>
     </section>
 
-<!--    <section id="aboutMe" class="about-me" role="region" aria-labelledby="about-title" itemprop="description">-->
-<!--        <div class="presentation">-->
-<!--            <div class="text-about">-->
-<!--                --><?php //$about_title = get_field('about_title') ?>
-<!--                <h2 id="about-title" itemprop="description">--><?php //= $about_title !== '' ? $about_title : '' ?><!--</h2>-->
-<!--                --><?php //$about_text = get_field('about_text') ?>
-<!--                --><?php //= $about_text !== '' ? $about_text : '' ?>
-<!--            </div>-->
-<!--            <div class="illustration">-->
-<!--                <div class="circle-container">-->
-<!--                    <img class="circle" src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/circle.svg"-->
-<!--                         alt="Cercle bleu décoratif" role="presentation">-->
-<!--                    <img class="avatar" src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/dragon-avatar.png"-->
-<!--                         alt="Avatar illustré de dragon">-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <img class="lantern__chinese" src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/lantern.svg"-->
-<!--                 alt="Lanterne chinoise décorative">-->
-<!--            <img class="corner-about corner-top-left-about"-->
-<!--                 src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/frame-decoration.svg"-->
-<!--                 alt="Décoration de coin style chinois">-->
-<!--            <img class="corner-about corner-bottom-right-about"-->
-<!--                 src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/frame-decoration.svg"-->
-<!--                 alt="Décoration de coin style chinois">-->
-<!--        </div>-->
-<!--    </section>-->
+
+
+
+    <?php
+    $projects_title    = get_field('projects_title') ?: 'A glimpse of my work';
+    $projects_subtitle = get_field('subtitle_projects') ?: "A collection of digital experiences, interfaces and ideas I've brought to life.";
+
+    $query_args = [
+            'post_type'      => 'projets',
+            'posts_per_page' => 4,
+            'orderby'        => 'menu_order',
+            'order'          => 'ASC',
+    ];
+
+
+    if (function_exists('pll_current_language')) {
+        $query_args['lang'] = pll_current_language();
+    }
+
+    $projects = new WP_Query($query_args);
+
+    // pagina Projets nella lingua giusta
+    $projects_page = get_page_by_path('mes-projets');
+    $projects_id   = $projects_page ? $projects_page->ID : 0;
+
+    if ($projects_id && function_exists('pll_get_post')) {
+        $projects_id = pll_get_post($projects_id) ?: $projects_id;
+    }
+
+    $projects_url = $projects_id ? get_permalink($projects_id) : home_url('/');
+    $projects_button = get_field('projects_button');
+
+    ?>
+
 
     <section class="projects-section" id="projets">
         <div class="projects">
-            <h2>A glimpse of my work</h2>
-            <p class="projects__subtitle">A collection of digital experiences, interfaces and ideas I've brought to life.</p>
-
-            <?php
-            $projects = new WP_Query([
-                    'post_type'      => 'projets',
-                    'posts_per_page' => 4,
-                    'orderby'        => 'menu_order',
-                    'order'          => 'ASC',
-            ]);
-            ?>
+            <h2><?= esc_html($projects_title); ?></h2>
+            <p class="projects__subtitle"><?= esc_html($projects_subtitle); ?></p>
 
             <?php if ($projects->have_posts()) : ?>
                 <div class="projects__grid">
@@ -83,78 +84,16 @@ get_header();
                 </div>
             <?php endif; ?>
 
-            <a class="btn-outline" href="<?= esc_url(home_url('/mes-projets/')); ?>">See more</a>
+            <?php if ($projects_button) : ?>
+                <a class="btn-outline" href="<?= esc_url($projects_url); ?>"><?= esc_html($projects_button); ?></a>
+            <?php endif; ?>
         </div>
     </section>
 
-<!--    <section id="history" class="history-section" role="region" aria-labelledby="history-title">-->
-<!--        <div class="history">-->
-<!--            <img class="furin furin-top" src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/furin-top.svg"-->
-<!--                 alt="Carillon japonais supérieur">-->
-<!--            <img class="furin furin-bottom"-->
-<!--                 src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/furin-bottom.svg"-->
-<!--                 alt="Carillon japonais inférieur">-->
-<!--            --><?php //$history_title = get_field('history_title') ?>
-<!--            <h2 id="history-title">--><?php //= $history_title !== '' ? $history_title : '' ?><!--</h2>-->
-<!---->
-<!--            --><?php //if (have_rows('experiences')) : ?>
-<!--                <div class="timeline">-->
-<!--                    --><?php //while (have_rows('experiences')) : the_row();
-//                        $date = get_sub_field('date');
-//                        $description = get_sub_field('description');
-//                        ?>
-<!--                        <div class="experience" itemscope itemtype="https://schema.org/Organization">-->
-<!--                            <p class="year">-->
-<!--                                --><?php //if (!empty($date)) : ?>
-<!--                                    <span class="date" itemprop="foundingDate">--><?php //= esc_html($date); ?><!--</span><br>-->
-<!--                                --><?php //endif; ?>
-<!--                                --><?php //if (!empty($description)) : ?>
-<!--                                    <span itemprop="description">--><?php //= esc_html($description); ?><!--</span>-->
-<!--                                --><?php //endif; ?>
-<!--                            </p>-->
-<!--                            <img src="--><?php //= get_template_directory_uri(); ?><!--/assets/images/lantern-blue.svg" alt="Lanterne bleue illustrée">-->
-<!--                        </div>-->
-<!--                    --><?php //endwhile; ?>
-<!--                </div>-->
-<!--            --><?php //else : ?>
-<!--                <p>Aucune expérience trouvée.</p>-->
-<!--            --><?php //endif; ?>
-<!--        </div>-->
-<!--    </section>-->
-
-<!--    <section id="technologies" class="technologies-section" role="region" aria-labelledby="skills-title">-->
-<!--        <div class="technogies">-->
-<!--            --><?php //$skill_title = get_field('skill_title') ?>
-<!--            <h2 id="skills-title">--><?php //= $skill_title !== '' ? $skill_title : '' ?><!--</h2>-->
-<!--            <img class="clouds2 clouds2-right"-->
-<!--                 src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/cloud-2.svg" alt="Nuage flottant ">-->
-<!--            <img class="clouds2 clouds2-left"-->
-<!--                 src="--><?php //echo get_template_directory_uri(); ?><!--/assets/images/cloud-2.svg" alt="Nuage flottant ">-->
-<!--            <div class="box-tech">-->
-<!--                --><?php //if (have_rows('technologies')): ?>
-<!--                    --><?php //while (have_rows('technologies')): the_row();
-//                        $icon = get_sub_field('icon');
-//                        $title = get_sub_field('title');
-//                        $subtitle = get_sub_field('subtitle');
-//                        ?>
-<!--                        <div class="tech" itemscope itemtype="https://schema.org/DefinedTerm">-->
-<!--                            <div class="icon">-->
-<!--                                --><?php //if ($icon): ?>
-<!--                                    <img src="--><?php //= esc_url($icon['url']); ?><!--" alt="--><?php //= esc_attr($icon['alt']); ?><!--">-->
-<!--                                --><?php //endif; ?>
-<!--                            </div>-->
-<!--                            <div class="text wrapper">-->
-<!--                                <p class="tech__title" itemprop="name">--><?php //= esc_html($title); ?><!--</p>-->
-<!--                                <p itemprop="description">--><?php //= esc_html($subtitle); ?><!--</p>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    --><?php //endwhile; ?>
-<!--                --><?php //endif; ?>
-<!--            </div>-->
-<!--        </div>-->
-<!--    </section>-->
-
     <?php
+    $contact_title    = get_field('contact_title') ?: 'Un mot, un souffle';
+    $contact_subtitle = get_field('subtitle_contact') ?: 'Je serais ravie d’échanger autour d’un projet, d’une idée ou simplement d’un rêve partagé.';
+
     $errors  = $_SESSION['contact_form_errors'] ?? [];
     $old     = $_SESSION['contact_form_old'] ?? [];
     $success = $_SESSION['contact_form_success'] ?? '';
@@ -167,8 +106,8 @@ get_header();
     <section id="contactMe" class="contactMe-section" role="region" aria-labelledby="contact-title" itemscope itemtype="https://schema.org/ContactPoint">
         <div class="contact-me">
             <div class="text-wrapper">
-                <h2 id="contact-title">Un mot, un souffle</h2>
-                <p class="contact__paragraphe">Je serais ravie d’échanger autour d’un projet, d’une idée ou simplement d’un rêve partagé.</p>
+                <h2 id="contact-title"><?= esc_html($contact_title); ?></h2>
+                <p class="contact__paragraphe"><?= esc_html($contact_subtitle); ?></p>
             </div>
 
             <div class="contact-main">
@@ -182,44 +121,54 @@ get_header();
                     <div class="form">
                         <div class="form-status" role="status" aria-live="polite">
                             <?php if ($success) : ?><p class="is-success"><?= esc_html($success); ?></p><?php endif; ?>
-                            <?php if ($errors) : ?><p class="is-error">Merci de corriger les champs indiqués ci-dessous.</p><?php endif; ?>
+                            <?php if ($errors) : ?><p class="is-error"><?= esc_html(pf_t('Merci de corriger les champs indiqués ci-dessous.')); ?></p><?php endif; ?>
                         </div>
 
-                        <form data-contact-form action="<?= esc_url(admin_url('admin-post.php')); ?>" method="post" novalidate aria-label="Formulaire de contact">
+                        <form data-contact-form
+                              action="<?= esc_url(admin_url('admin-post.php')); ?>" method="post" novalidate
+                              aria-label="<?= esc_attr(pf_t('Formulaire de contact')); ?>"
+                              data-err-name="<?= esc_attr(pf_t('Le nom est requis.')); ?>"
+                              data-err-email="<?= esc_attr(pf_t('L’adresse email est requise.')); ?>"
+                              data-err-email-bad="<?= esc_attr(pf_t('Adresse email invalide.')); ?>"
+                              data-err-message="<?= esc_attr(pf_t('Le message est requis.')); ?>"
+                              data-msg-fix="<?= esc_attr(pf_t('Merci de corriger les champs indiqués ci-dessous.')); ?>"
+                              data-msg-fail="<?= esc_attr(pf_t('Une erreur est survenue, merci de réessayer.')); ?>">
+
                             <input type="hidden" name="action" value="handle_contact_form">
+                            <input type="hidden" name="form_lang" value="<?= esc_attr(function_exists('pll_current_language') ? pll_current_language() : ''); ?>">
                             <?php wp_nonce_field('contact_form', 'contact_nonce'); ?>
 
                             <div class="hp-field" aria-hidden="true">
-                                <label for="website">Ne pas remplir</label>
+                                <label for="website"><?= esc_html(pf_t('Ne pas remplir')); ?></label>
                                 <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
                             </div>
 
-                            <p class="form-note">Les champs marqués d’un <span class="required">*</span> sont obligatoires.</p>
+                            <p class="form-note"><?= sprintf(esc_html(pf_t('Les champs marqués d’un %s sont obligatoires.')), '<span class="required">*</span>'); ?></p>
 
                             <div class="form-input-container">
                                 <div class="form-input-wrapper <?= isset($errors['name']) ? 'has-error' : ''; ?>">
-                                    <label for="name">Nom <span class="required">*</span></label>
-                                    <input type="text" id="name" name="name" placeholder="Ex. Mark Smith"
+                                    <label for="name"><?= esc_html(pf_t('Nom')); ?> <span class="required">*</span></label>
+                                    <input type="text" id="name" name="name" placeholder="<?= esc_attr(pf_t('Ex. Mark Smith')); ?>"
                                            value="<?= $val('name'); ?>" required aria-required="true" aria-describedby="err-name">
                                     <p class="field-error" id="err-name"><?= esc_html($errors['name'] ?? ''); ?></p>
                                 </div>
 
                                 <div class="form-input-wrapper <?= isset($errors['email']) ? 'has-error' : ''; ?>">
-                                    <label for="email">Email <span class="required">*</span></label>
-                                    <input type="email" id="email" name="email" placeholder="Ex. marksmith@gmail.com"
+                                    <label for="email"><?= esc_html(pf_t('Email')); ?> <span class="required">*</span></label>
+                                    <input type="email" id="email" name="email" placeholder="<?= esc_attr(pf_t('Ex. marksmith@gmail.com')); ?>"
                                            value="<?= $val('email'); ?>" required aria-required="true" aria-describedby="err-email">
                                     <p class="field-error" id="err-email"><?= esc_html($errors['email'] ?? ''); ?></p>
                                 </div>
 
                                 <div class="form-input-wrapper <?= isset($errors['message']) ? 'has-error' : ''; ?>">
-                                    <label for="message">Message <span class="required">*</span></label>
-                                    <textarea name="message" id="message" rows="8" placeholder="Ex. Écrivez votre message ici"
+                                    <label for="message"><?= esc_html(pf_t('Message')); ?> <span class="required">*</span></label>
+                                    <textarea name="message" id="message" rows="8" placeholder="<?= esc_attr(pf_t('Ex. Écrivez votre message ici')); ?>"
                                               required aria-required="true" aria-describedby="err-message"><?= esc_textarea($old['message'] ?? ''); ?></textarea>
                                     <p class="field-error" id="err-message"><?= esc_html($errors['message'] ?? ''); ?></p>
                                 </div>
                             </div>
 
-                            <button class="btn-form" type="submit">Contactez-moi !</button>
+                            <button class="btn-form" type="submit"><?= esc_html(pf_t('Contactez-moi !')); ?></button>
                         </form>
                     </div>
                 </div>

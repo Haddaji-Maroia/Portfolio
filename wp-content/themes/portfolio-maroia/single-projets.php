@@ -2,7 +2,15 @@
 
 <?php
 $back_page = get_page_by_path('mes-projets');
-$back_url  = $back_page ? get_permalink($back_page) : home_url('/projets/');
+$back_id   = $back_page ? $back_page->ID : 0;
+$back_label = get_field('back_label');
+
+// pagina Projets nella lingua corrente
+if ($back_id && function_exists('pll_get_post')) {
+    $back_id = pll_get_post($back_id) ?: $back_id;
+}
+
+$back_url = $back_id ? get_permalink($back_id) : home_url('/');
 
 // immagini del progetto: galleria, oppure immagine singola
 $raw    = get_field('galerie_projects') ?: get_field('image_projet');
@@ -29,15 +37,16 @@ if ($raw) {
         }
     }
 }
+$tech_title = get_field('tecnologie_title');
 $total = count($images);
 ?>
 
     <main class="single-project">
 
-        <header class="sp-hero">
-            <a class="sp-back" href="<?= esc_url($back_url); ?>">← Tous les projets</a>
+        <div class="sp-hero">
+            <a class="sp-back" href="<?= esc_url($back_url); ?>">← <?= esc_html($back_label); ?></a>
             <h1><?php the_title(); ?></h1>
-        </header>
+        </div>
 
         <?php if ($images) : ?>
             <div class="sp-gallery__grid" id="galerie">
@@ -92,7 +101,7 @@ $total = count($images);
 
             <?php if (have_rows('technologies')) : ?>
                 <aside class="sp-tech">
-                    <h2>Technologies</h2>
+                    <?php if ($tech_title) : ?><h2><?= esc_html($tech_title); ?></h2><?php endif; ?>
                     <ul>
                         <?php while (have_rows('technologies')) : the_row();
                             $tech_name = get_sub_field('technology_name');
@@ -126,7 +135,7 @@ $total = count($images);
         <?php endif; ?>
 
         <div class="sp-footer">
-            <a class="sp-btn" href="<?= esc_url($back_url); ?>">← Tous les projets</a>
+            <a class="sp-back" href="<?= esc_url($back_url); ?>">← <?= esc_html($back_label); ?></a>
         </div>
 
     </main>

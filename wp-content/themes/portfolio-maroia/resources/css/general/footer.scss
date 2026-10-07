@@ -1,68 +1,89 @@
-@use "../settings/fonts";
+.site-footer {
+  position: relative;
+  padding: 72px 24px 32px;
+  text-align: center;
+  color: #dff0fc;
+  background: #2f6a94;
+}
 
-footer {
-  background-color: #428BBC;
-  padding: 60px 40px;
-  color: #333;
+// la peonia sta a cavallo del bordo
+.site-footer__peony {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 84px;
+  height: auto;
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 6px 10px rgba(15, 35, 55, 0.25));
+  animation: footer-float 4s ease-in-out infinite alternate;
+}
 
-  nav.footer-nav {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 40px;
+.site-footer__inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
 
-    .footer-column {
-      flex: 1 1 200px;
-      max-width: 300px;
+.site-footer__made {
+  margin: 0 0 24px;
+  font-family: var(--font-title), serif;
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: #fff;
+}
 
-      h3 {
-        font-size: 1.4rem;
-        margin-bottom: 20px;
-        color: #C4E5FC;
-      }
+// link a pillola, come i bottoni del sito
+.site-footer__links {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  list-style: none;
+  margin: 0 0 28px;
+  padding: 0;
 
-      ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+  a {
+    display: inline-block;
+    padding: 8px 28px;
+    color: #fff;
+    text-decoration: none;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 999px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 
-        li {
-          margin-bottom: 10px;
-          font-size: 1rem;
-
-          a {
-            text-decoration: none;
-            color: #333;
-            transition: color 0.3s;
-
-            &:hover {
-              color: #C4E5FC;
-              text-decoration: underline;
-            }
-          }
-        }
-      }
+    &:hover,
+    &:focus-visible {
+      background: #fff;
+      color: #2f6a94;
     }
   }
+}
 
-  .footer-bottom {
-    margin-top: 40px;
-    text-align: center;
-    font-size: 0.9rem;
-    border-top: 1px solid #C4E5FC;
-    padding-top: 20px;
+// ideogrammi: 我 · 梦 · 创
+.site-footer__hanzi {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 0 0 20px;
+  font-size: 1.3rem;
+  color: #8fc6ea;
+
+  .dot {
+    font-size: 0.8rem;
+    opacity: 0.7;
   }
+}
 
-  @media (max-width: 768px) {
-    padding: 40px 20px;
+.site-footer__copy {
+  margin: 0;
+  font-size: 0.8rem;
+  opacity: 0.7;
+}
 
-    nav.footer-nav {
-      flex-direction: column;
-      gap: 30px;
+@keyframes footer-float {
+  from { transform: translate(-50%, -50%); }
+  to   { transform: translate(-50%, calc(-50% - 6px)); }
+}
 
-      .footer-column {
-        max-width: 100%;
-      }
-    }
-  }
+@media (prefers-reduced-motion: reduce) {
+  .site-footer__peony { animation: none; }
+  .site-footer__links a { transition: none; }
 }

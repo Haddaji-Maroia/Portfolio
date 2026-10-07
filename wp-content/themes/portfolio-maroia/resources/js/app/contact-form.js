@@ -1,15 +1,17 @@
+cat > resources/js/app/contact-form.js <<'EOF'
 document.addEventListener('submit', async (e) => {
   const form = e.target.closest('[data-contact-form]');
   if (!form) return;
 
   e.preventDefault();
 
+  const d = form.dataset;
   const status = document.querySelector('.form-status');
   const button = form.querySelector('.btn-form');
   const labels = {
-    name: 'Le nom est requis.',
-    email: 'L’adresse email est requise.',
-    message: 'Le message est requis.',
+    name: d.errName,
+    email: d.errEmail,
+    message: d.errMessage,
   };
 
   const showErrors = (errors) => {
@@ -35,12 +37,12 @@ document.addEventListener('submit', async (e) => {
   });
   const email = String(data.get('email') || '').trim();
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    errors.email = 'Adresse email invalide.';
+    errors.email = d.errEmailBad;
   }
 
   showErrors(errors);
   if (Object.keys(errors).length) {
-    setStatus('Merci de corriger les champs indiqués ci-dessous.', 'error');
+    setStatus(d.msgFix, 'error');
     const firstInvalid = form.querySelector('[aria-invalid="true"]');
     if (firstInvalid) firstInvalid.focus({ preventScroll: true });
     return;
@@ -65,12 +67,12 @@ document.addEventListener('submit', async (e) => {
       const errs = json.errors || {};
       showErrors(errs);
       const extra = Object.keys(errs)
-        .filter((k) => !form.querySelector('[name="' + k + '"]'))
-        .map((k) => errs[k]);
-      setStatus(extra.length ? extra.join(' ') : 'Merci de corriger les champs indiqués ci-dessous.', 'error');
+          .filter((k) => !form.querySelector('[name="' + k + '"]'))
+          .map((k) => errs[k]);
+      setStatus(extra.length ? extra.join(' ') : d.msgFix, 'error');
     }
   } catch (err) {
-    setStatus('Une erreur est survenue, merci de réessayer.', 'error');
+    setStatus(d.msgFail, 'error');
   } finally {
     button.disabled = false;
   }

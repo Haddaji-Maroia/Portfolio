@@ -127,8 +127,15 @@ add_action('admin_post_handle_contact_form', 'handle_contact_form');
 
 function handle_contact_form() {
     $is_ajax = (($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'XMLHttpRequest');
-    $back = (wp_get_referer() ?: home_url('/')) . '#contactMe';
+    $back    = (wp_get_referer() ?: home_url('/')) . '#contactMe';
 
+    // lingua del form (arriva dal campo nascosto) e funzione per tradurre i testi
+    $lang = sanitize_key($_POST['form_lang'] ?? '');
+    $t    = function ($text) use ($lang) {
+        return pf_t($text, $lang ?: null);
+    };
+
+    // risposta comune: JSON per fetch, redirect per l'invio normale
     $finish = function ($ok, $errors = [], $message = '', $old = []) use ($is_ajax, $back) {
         if ($is_ajax) {
             wp_send_json(['ok' => $ok, 'errors' => $errors, 'message' => $message], $ok ? 200 : 422);
@@ -145,10 +152,10 @@ function handle_contact_form() {
     };
 
     if (!isset($_POST['contact_nonce']) || !wp_verify_nonce($_POST['contact_nonce'], 'contact_form')) {
-        $finish(false, ['message' => 'Session expirée, merci de recharger la page.']);
+        $finish(false, ['message' => $t('Session expirée, merci de recharger la page.')]);
     }
-    if (!empty($_POST['website'])) { // honeypot
-        $finish(true, [], 'Merci ! Votre message a été envoyé.');
+    if (!empty($_POST['website'])) { // honeypot anti-spam
+        $finish(true, [], $t('Merci ! Votre message a été envoyé.'));
     }
 
     $name    = sanitize_text_field(wp_unslash($_POST['name'] ?? ''));
@@ -156,10 +163,10 @@ function handle_contact_form() {
     $message = sanitize_textarea_field(wp_unslash($_POST['message'] ?? ''));
 
     $errors = [];
-    if ($name === '')    $errors['name']    = 'Le nom est requis.';
-    if ($email === '')   $errors['email']   = 'L’adresse email est requise.';
-    elseif (!is_email($email)) $errors['email'] = 'Adresse email invalide.';
-    if ($message === '') $errors['message'] = 'Le message est requis.';
+    if ($name === '')    $errors['name']    = $t('Le nom est requis.');
+    if ($email === '')   $errors['email']   = $t('L’adresse email est requise.');
+    elseif (!is_email($email)) $errors['email'] = $t('Adresse email invalide.');
+    if ($message === '') $errors['message'] = $t('Le message est requis.');
 
     if ($errors) {
         $finish(false, $errors, '', ['name' => $name, 'email' => $email, 'message' => $message]);
@@ -179,7 +186,7 @@ function handle_contact_form() {
         ['Reply-To: ' . $email]
     );
 
-    $finish(true, [], 'Merci ! Votre message a été envoyé.');
+    $finish(true, [], $t('Merci ! Votre message a été envoyé.'));
 }
 
 
@@ -191,3 +198,42 @@ function add_nav_link_class($classes, $item, $args) {
     return $classes;
 }
 add_filter('nav_menu_css_class', 'add_nav_link_class', 10, 3);
+
+
+// STRINGHE DEL FORM, traducibili da Langues → Traductions de chaînes
+function pf_form_strings() {
+    return [
+        'Les champs marqués d’un %s sont obligatoires.',
+        'Nom',
+        'Email',
+        'Message',
+        'Ex. Mark Smith',
+        'Ex. marksmith@gmail.com',
+        'Ex. Écrivez votre message ici',
+        'Contactez-moi !',
+        'Formulaire de contact',
+        'Ne pas remplir',
+        'Merci de corriger les champs indiqués ci-dessous.',
+        'Le nom est requis.',
+        'L’adresse email est requise.',
+        'Adresse email invalide.',
+        'Le message est requis.',
+        'Merci ! Votre message a été envoyé.',
+        'Une erreur est survenue, merci de réessayer.',
+        'Session expirée, merci de recharger la page.',
+    ];
+}
+
+add_action('init', function () {
+    if (!function_exists('pll_register_string')) return;
+
+    foreach (pf_form_strings() as $string) {
+        pll_register_string('form', $string, 'Portfolio');
+    }
+});
+
+// restituisce la traduzione (nella lingua indicata, o in quella corrente)
+function pf_t($text, $lang = null) {
+    if (!function_exists('pll__')) return $text;
+    return $lang ? pll_translate_string($text, $lang) : pll__($text);
+}

@@ -28,7 +28,7 @@
 
   // INTRO
   .about-intro {
-    padding-top: calc(var(--nav-h, 80px) + 40px);
+    padding-top: 24px;
 
     .about-lead {
       margin: 24px 0 8px;
@@ -84,90 +84,71 @@
     p { margin: 4px 0 0; }
   }
 
-  // WHAT I DO: SIGILLI HANKO
-  .seal-groups {
+  // WHAT I DO: LANTERNE
+  .lantern-groups {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 48px 40px;
+    gap: 40px;
     margin-top: 40px;
   }
 
-  .seal-group {
-    h3 {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 1.4rem;
-    }
-
-    > p {
-      margin: 8px 0 0;
-      line-height: 1.6;
-      max-width: 34ch;
-    }
-  }
-
-  .seal-group__hanzi {
-    font-size: 1.6rem;
-    color: #2f6a94;
-    opacity: 0.55;
-  }
-
-  .seals {
+  .lanterns {
     display: flex;
     flex-wrap: wrap;
-    gap: 18px;
+    gap: 0 14px;
     list-style: none;
-    margin: 28px 0 0;
+    margin: 16px 0 0;
     padding: 0;
+    border-top: 2px solid #5a7391; // il filo
   }
 
-  .seal {
-    --ink: #2f6a94;
-    display: grid;
-    place-items: center;
-    width: 78px;
-    height: 78px;
-    padding: 6px;
-    box-sizing: border-box;
-    font-family: var(--font-title), serif;
-    font-size: 0.95rem;
-    line-height: 1.1;
+  .lantern-groups .lanterns li {
+    position: relative;
+    width: 72px;
+    margin-top: 22px; // lunghezza del filo
+    padding: 22px 4px;
+    font-size: 0.8rem;
+    line-height: 1.2;
     text-align: center;
-    color: var(--ink);
-    border: 3px solid var(--ink);
-    border-radius: 6px;
-    box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 4.5px var(--ink);
-    background:
-            radial-gradient(circle at 20% 25%, rgba(47, 106, 148, 0.12) 0 6%, transparent 7%),
-            radial-gradient(circle at 78% 70%, rgba(47, 106, 148, 0.1) 0 8%, transparent 9%),
-            #fff;
-    transform: rotate(var(--r, 0deg));
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-    cursor: default;
+    color: #12304a;
+    background: #8fc6ea;
+    border-radius: 50% / 40%;
+    transform-origin: top center;
+    animation: lantern-sway 4s ease-in-out infinite alternate;
+    transition: background-color 0.4s ease, box-shadow 0.4s ease;
 
-    &:hover {
-      transform: rotate(0deg) translateY(3px) scale(0.97);
-      box-shadow: inset 0 0 0 3px #fff, inset 0 0 0 4.5px var(--ink), 0 0 0 4px rgba(66, 139, 188, 0.15);
+    // filo
+    &::before {
+      content: "";
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      width: 2px;
+      height: 22px;
+      background: #5a7391;
     }
 
-    // inclinazione "stampata a mano"
-    &:nth-child(5n + 1) { --r: -4deg; }
-    &:nth-child(5n + 2) { --r: 3deg; }
-    &:nth-child(5n + 3) { --r: -2deg; }
-    &:nth-child(5n + 4) { --r: 4deg; }
-    &:nth-child(5n + 5) { --r: -3deg; }
-  }
+    // cappuccio sopra
+    &::after {
+      content: "";
+      position: absolute;
+      top: -4px;
+      left: 50%;
+      width: 24px;
+      height: 6px;
+      transform: translateX(-50%);
+      background: #2f6a94;
+      border-radius: 2px;
+    }
 
-  .seal--wide { width: 118px; }
+    &:nth-child(2n) { animation-delay: 0.8s; }
+    &:nth-child(3n) { animation-delay: 1.6s; }
 
-  .seal--draft {
-    --ink: #6aa3c9;
-    border-style: dashed;
-    box-shadow: none;
-    background: transparent;
-
-    &:hover { box-shadow: 0 0 0 4px rgba(66, 139, 188, 0.12); }
+    // si accende
+    &:hover {
+      background: #ffe9a0;
+      box-shadow: 0 0 18px rgba(255, 214, 102, 0.9);
+    }
   }
 
   // BEYOND THE SCREEN
@@ -202,10 +183,15 @@
   }
 
   @media (max-width: 900px) {
-    .seal-groups { grid-template-columns: 1fr; }
+    .lantern-groups { grid-template-columns: 1fr; }
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .seal { transition: none; }
+    .lantern-groups .lanterns li { animation: none; }
   }
+}
+
+@keyframes lantern-sway {
+  from { transform: rotate(-2deg); }
+  to   { transform: rotate(2deg); }
 }

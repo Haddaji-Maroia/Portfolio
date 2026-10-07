@@ -1,7 +1,18 @@
 <?php
 /* Template Name: About */
 get_header();
-$img = get_template_directory_uri() . '/assets/images/';
+
+$title    = get_field('about_title');
+$lead     = get_field('about_lead');
+$text     = get_field('about_text');
+$j_title  = get_field('journey_title');
+$j_sub    = get_field('journey_subtitle');
+$s_title  = get_field('skills_title');
+$b_title  = get_field('beyond_title');
+
+$timeline = get_field('timeline') ?: [];
+$groups   = get_field('skill_groups') ?: [];
+$cards    = get_field('beyond_cards') ?: [];
 ?>
 
     <main class="about-page">
@@ -9,84 +20,74 @@ $img = get_template_directory_uri() . '/assets/images/';
         <!-- INTRO -->
         <section class="about-intro">
             <div class="about-intro__text">
-                <p class="hanzi"><span lang="zh">我</span> wǒ · me</p>
-                <h1>A little about me</h1>
-                <p class="about-lead">Hi, I'm Marwa — a web developer &amp; designer based in Belgium.</p>
-                <p>I enjoy turning ideas into thoughtful digital experiences, combining clean code with visual design. I'm especially drawn to projects where creativity and technology meet.</p>
-                <p>When I'm not coding, you'll probably find me exploring new stories, discovering new places or learning something new.</p>
+                <p class="hanzi" aria-hidden="true"><span lang="zh">我</span> wǒ · me</p>
+
+                <?php if ($title) : ?><h1><?= esc_html($title); ?></h1><?php endif; ?>
+                <?php if ($lead) : ?><p class="about-lead"><?= esc_html($lead); ?></p><?php endif; ?>
+                <?php if ($text) : ?><?= wp_kses_post($text); ?><?php endif; ?>
             </div>
         </section>
 
         <!-- JOURNEY -->
-        <section class="about-journey">
-            <h2>A journey in progress</h2>
-            <p class="about-sub">Still learning, still creating, still curious.</p>
+        <?php if ($timeline) : ?>
+            <section class="about-journey">
+                <?php if ($j_title) : ?><h2><?= esc_html($j_title); ?></h2><?php endif; ?>
+                <?php if ($j_sub) : ?><p class="about-sub"><?= esc_html($j_sub); ?></p><?php endif; ?>
 
-            <ul class="timeline">
-                <li><span class="timeline__year">2023</span><p>Started my journey in web development</p></li>
-                <li><span class="timeline__year">2024</span><p>Discovered my passion for interfaces &amp; digital experiences</p></li>
-                <li><span class="timeline__year">2025</span><p>Building projects and expanding my technical skills</p></li>
-                <li><span class="timeline__year">2026</span><p>Web development, projects and an internship</p></li>
-            </ul>
-        </section>
+                <ul class="timeline">
+                    <?php foreach ($timeline as $step) : ?>
+                        <li>
+                            <span class="timeline__year"><?= esc_html($step['year']); ?></span>
+                            <p><?= esc_html($step['text']); ?></p>
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
+            </section>
+        <?php endif; ?>
 
         <!-- WHAT I DO -->
-        <section class="about-skills">
-            <h2>What I do</h2>
-            <p class="about-sub">Every tool I use leaves its mark.</p>
+        <?php if ($groups) : ?>
+            <section class="about-skills">
+                <?php if ($s_title) : ?><h2><?= esc_html($s_title); ?></h2><?php endif; ?>
 
-            <div class="seal-groups">
-
-                <div class="seal-group">
-                    <h3><span lang="zh" class="seal-group__hanzi">码</span> Development</h3>
-                    <p>Building responsive and functional websites and applications.</p>
-                    <ul class="seals">
-                        <li class="seal">HTML</li>
-                        <li class="seal">CSS</li>
-                        <li class="seal seal--wide">JavaScript</li>
-                        <li class="seal">PHP</li>
-                        <li class="seal">Laravel</li>
-                    </ul>
+                <div class="lantern-groups">
+                    <?php foreach ($groups as $group) :
+                        $items = array_filter(array_map('trim', preg_split('/\R/', (string) $group['group_items']))); ?>
+                        <div class="lantern-group">
+                            <h3><?= esc_html($group['group_title']); ?></h3>
+                            <ul class="lanterns">
+                                <?php foreach ($items as $item) : ?>
+                                    <li><?= esc_html($item); ?></li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                    <?php endforeach; ?>
                 </div>
-
-                <div class="seal-group">
-                    <h3><span lang="zh" class="seal-group__hanzi">画</span> Design</h3>
-                    <p>Designing interfaces that feel clear, intuitive and visually coherent.</p>
-                    <ul class="seals">
-                        <li class="seal">Figma</li>
-                        <li class="seal">UI design</li>
-                        <li class="seal seal--wide">Responsive</li>
-                    </ul>
-                </div>
-
-                <div class="seal-group">
-                    <h3><span lang="zh" class="seal-group__hanzi">学</span> Exploring</h3>
-                    <p>Always learning, experimenting and discovering new ways to create.</p>
-                    <ul class="seals">
-                        <li class="seal seal--draft">Flutter</li>
-                        <li class="seal seal--draft seal--wide">WordPress</li>
-                    </ul>
-                </div>
-
-            </div>
-        </section>
+            </section>
+        <?php endif; ?>
 
         <!-- BEYOND THE SCREEN -->
-        <section class="about-beyond">
-            <h2>Beyond the screen</h2>
-            <div class="cards">
-                <div class="card"><span class="card__icon" aria-hidden="true">♡</span><h3>Currently learning</h3><p>Chinese &amp; new web technologies</p></div>
-                <div class="card"><span class="card__icon" aria-hidden="true">⋆˚꩜｡</span><h3>Usually coding with</h3><p>Music, or a drama playing somewhere</p></div>
-                <div class="card"><span class="card__icon" aria-hidden="true">˙⋆✮</span><h3>Dreaming about</h3><p>Working &amp; studying abroad</p></div>
-                <div class="card"><span class="card__icon" aria-hidden="true">𐙚⋆.˚</span><h3>I love</h3><p>Design, stories &amp; visual details</p></div>
-            </div>
+        <?php if ($cards) : ?>
+            <section class="about-beyond">
+                <?php if ($b_title) : ?><h2><?= esc_html($b_title); ?></h2><?php endif; ?>
 
-            <ul class="hanzi-row" aria-hidden="true">
-                <li><span lang="zh">我</span> wǒ · me</li>
-                <li><span lang="zh">梦</span> mèng · dream</li>
-                <li><span lang="zh">创</span> chuàng · create</li>
-            </ul>
-        </section>
+                <div class="cards">
+                    <?php foreach ($cards as $card) : ?>
+                        <div class="card">
+                            <span class="card__icon" aria-hidden="true"><?= esc_html($card['card_icon']); ?></span>
+                            <h3><?= esc_html($card['card_title']); ?></h3>
+                            <p><?= esc_html($card['card_text']); ?></p>
+                        </div>
+                    <?php endforeach; ?>
+                </div>
+
+                <ul class="hanzi-row" aria-hidden="true">
+                    <li><span lang="zh">我</span> wǒ · me</li>
+                    <li><span lang="zh">梦</span> mèng · dream</li>
+                    <li><span lang="zh">创</span> chuàng · create</li>
+                </ul>
+            </section>
+        <?php endif; ?>
 
     </main>
 
